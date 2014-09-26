@@ -15,6 +15,8 @@
 
     <!-- Custom styles for this template -->
     <link href="/css/custom.css" rel="stylesheet">
+    <!-- jQuery UI Theme for Datepicker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -89,13 +91,66 @@
 
                     <!--City,state,zip-->
                     <div class="form-group">
-                        <div style="width: 50%; float:left;" class="input-group">
+                        <div style="width: 41.5%; float:left;" class="input-group">
                             <input type="text" class="form-control" id="InputCity" name="InputCity" placeholder="City" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
-                        <div style="width: 19%; float:left; margin-left: 1%;" class="input-group">
-                            <input type="text" class="form-control" id="InputState" name="InputState" placeholder="State" required>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        <div style="width: 19%; float:left; margin-left: 1%; margin-top:7px;" class="input-group">
+                            <select name="InputState" id="InputState">
+                                <option value="AL">Alabama</option>
+								<option value="AK">Alaska</option>
+								<option value="AZ">Arizona</option>
+								<option value="AR">Arkansas</option>
+								<option value="CA">California</option>
+								<option value="CO">Colorado</option>
+								<option value="CT">Connecticut</option>
+								<option value="DE">Delaware</option>
+								<option value="DC">District Of Columbia</option>
+								<option value="FL">Florida</option>
+								<option value="GA">Georgia</option>
+								<option value="HI">Hawaii</option>
+								<option value="ID">Idaho</option>
+								<option value="IL">Illinois</option>
+								<option value="IN">Indiana</option>
+								<option value="IA">Iowa</option>
+								<option value="KS">Kansas</option>
+								<option value="KY">Kentucky</option>
+								<option value="LA">Louisiana</option>
+								<option value="ME">Maine</option>
+								<option value="MD">Maryland</option>
+								<option value="MA">Massachusetts</option>
+								<option value="MI">Michigan</option>
+								<option value="MN">Minnesota</option>
+								<option value="MS">Mississippi</option>
+								<option value="MO">Missouri</option>
+								<option value="MT">Montana</option>
+								<option value="NE">Nebraska</option>
+								<option value="NV">Nevada</option>
+								<option value="NH">New Hampshire</option>
+								<option value="NJ">New Jersey</option>
+								<option value="NM">New Mexico</option>
+								<option value="NY">New York</option>
+								<option value="NC">North Carolina</option>
+								<option value="ND">North Dakota</option>
+								<option value="OH">Ohio</option>
+								<option value="OK">Oklahoma</option>
+								<option value="OR">Oregon</option>
+								<option value="PA">Pennsylvania</option>
+								<option value="RI">Rhode Island</option>
+								<option value="SC">South Carolina</option>
+								<option value="SD">South Dakota</option>
+								<option value="TN">Tennessee</option>
+								<option value="TX">Texas</option>
+								<option value="UT">Utah</option>
+								<option value="VT">Vermont</option>
+								<option value="VA">Virginia</option>
+								<option value="WA">Washington</option>
+								<option value="WV">West Virginia</option>
+								<option value="WI">Wisconsin</option>
+								<option value="WY">Wyoming</option> 
+                            </select>
+                            <!--<input type="text" class="form-control" id="InputState" name="InputState" placeholder="State" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>-->
                         </div>
                         <div style="width: 29%; float:left; margin-left: 1%;" class="input-group">
                             <input type="text" class="form-control" id="InputZip" name="InputZip" placeholder="Zip Code" required>
@@ -103,8 +158,8 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label style="margin-top: 14px;" for="InputTier">Rewards Level</label>
+                    <div class="form-group" style="clear:both;">
+                        <label style="margin-top: 14px; clear:both;" for="InputTier">Rewards Level</label>
                         <div class="input-group">
                             <select name="tier" id="tierselect">
                                 <option value="basic">Basic (Free! 1X point multiplier)</option>
@@ -145,6 +200,16 @@
                             <a href="/login.php">Login Here!</a>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label style="margin-top: 14px;" for="AlreadyMember">Are You Human?</label>
+                        <div>
+                            <?php 
+                            	require_once('libs/recaptchalib.php');
+								$publickey = "6LdW8_oSAAAAALZWluUE1ETMF5_RFhgK2PTZB2Hd"; // you got this from the signup page
+								echo recaptcha_get_html($publickey, $error = null, $use_ssl = true);
+                            ?>
+                        </div>
+                    </div>
 
 
 
@@ -180,6 +245,15 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
     <script src="/js/submitscript.js"></script>
+
+    <!-- For the birthdate field datepicker -->
+    <script>
+    $(function() {
+        $( "#InputBirthdateFirst" ).datepicker({changeYear: true, yearRange: "1901:2012"});
+    });
+    </script>
+
   </body>
 </html>
