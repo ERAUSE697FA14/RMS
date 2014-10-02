@@ -26,14 +26,15 @@
   </head>
 
   <body>
+<div class="bigContainer">
+    <div class="container" style="width: 49%; float: left;">
+    
+    <!--<div class="content-heading"><h1>SE 697 Rewards Program Registration</h1></div><br />-->
 
-    <div class="container">
-    <div class="logo"><a href="http://rmsystem.org"><img src="img/logo.png"></a></div>
-    <div class="content-heading"><h1>SE 697 Rewards Program Registration</h1></div><br />
         <div class="row">
             <form role="form" id="register-form">
-                <div class="col-lg-6">
-                    <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span> = Required Field</strong></div>
+                <div class="col-lg-11">
+                    <div class="well well-sm" style="margin-bottom: 5px; margin-top: 8px;"><strong><span class="glyphicon glyphicon-asterisk"></span> = Required Field</strong></div>
                     <div class="form-group">
                         <label style="display: block;" for="InputName">Name</label>
                         <div style="width: 49%; float: left" class="input-group">
@@ -68,7 +69,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="InputPasswordSecond">Password Again</label>
+                        <label for="InputPasswordSecond">Confirm Password</label>
                         <div class="input-group">
                             <input type="password" class="form-control" id="InputPasswordSecond" name="InputPasswordSecond" placeholder="Confirm Password" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
@@ -91,7 +92,7 @@
 
                     <!--City,state,zip-->
                     <div class="form-group">
-                        <div style="width: 41.5%; float:left;" class="input-group">
+                        <div style="width: 41%; float:left;" class="input-group">
                             <input type="text" class="form-control" id="InputCity" name="InputCity" placeholder="City" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
@@ -152,8 +153,8 @@
                             <!--<input type="text" class="form-control" id="InputState" name="InputState" placeholder="State" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>-->
                         </div>
-                        <div style="width: 29%; float:left; margin-left: 1%;" class="input-group">
-                            <input type="text" class="form-control" id="InputZip" name="InputZip" placeholder="Zip Code" required>
+                        <div style="width: 23%; float:right; margin-left: 1%;" class="input-group">
+                            <input type="text" class="form-control" id="InputZip" name="InputZip" placeholder="Zip" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
                     </div>
@@ -162,10 +163,10 @@
                         <label style="margin-top: 14px; clear:both;" for="InputTier">Rewards Level</label>
                         <div class="input-group">
                             <select name="tier" id="tierselect">
-                                <option value="basic">Basic (Free! 1X point multiplier)</option>
-                                <option value="beginner">Beginner ($50/year, 2X point multiplier)</option>
-                                <option value="pro">Professional ($100/year, 3X point multiplier)</option>
-                                <option value="extreme">Extreme ($150/year, 4X point multiplier)</option> 
+                                <option value="value">Value (Free! 1X point multiplier)</option>
+                                <option value="gold">Gold ($50/year, 2X point multiplier)</option>
+                                <option value="platinum">Platinum ($100/year, 3X point multiplier)</option>
+                                <option value="prestige">Prestige ($150/year, 4X point multiplier)</option> 
                             </select>
                         </div>
                     </div>
@@ -178,17 +179,17 @@
                         </div>
                     </div>
 
-                    <label for="InputCC">Credit Card</label>
+                    <label for="InputCC">Credit Card (Visa, Mastercard, or Discover)</label>
                     <div class="form-group">
                         <div style="width: 50%; float:left;" class="input-group">
                             <input type="text" class="form-control" id="InputCC" name="InputCC" placeholder="CC Number" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
-                        <div style="width: 29%; float:left; margin-left: 1%;" class="input-group">
+                        <div style="width: 27%; float:left; margin-left: 1%;" class="input-group">
                             <input type="text" class="form-control" id="InputCCExpire" name="InputCCExpire" placeholder="Expire" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
-                        <div style="width: 19%; float:left; margin-left: 1%;" class="input-group">
+                        <div style="width: 21%; float:left; margin-left: 1%;" class="input-group">
                             <input type="text" class="form-control" id="InputCCCVV" name="InputCCCVV" placeholder="CVV" required>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
@@ -201,7 +202,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label style="margin-top: 14px;" for="AlreadyMember">Are You Human?</label>
+                        <label style="margin-top: 14px;" for="AlreadyMember">Please type the code below:</label>
                         <div>
                             <?php 
                             	require_once('libs/recaptchalib.php');
@@ -218,19 +219,13 @@
                     <input type="submit" name="submit" id="submit" value="Submit" style="clear: both;" class="btn btn-primary btn-lg btn-block">
                 </div>
             </form>
-            <div class="col-lg-5 col-md-push-1">
+            <!--<div class="col-lg-5 col-md-push-1">
                 <div class="col-md-12">
-                    <!--<div class="alert alert-success">
-                        <strong><span class="glyphicon glyphicon-ok"></span> Success! Message sent.</strong>
-                    </div>
-                    <div class="alert alert-danger">
-                        <span class="glyphicon glyphicon-remove"></span><strong> Error! Please check all page inputs.</strong>
-                    </div>-->
                     <div>
                         <img src="img/rewards.jpg">
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
 
 
@@ -240,6 +235,14 @@
 
     </div>
 
+    <div class="logo"><a href="http://rmsystem.org"><img src="img/logo.png"></a></div>
+
+    <div style="float:right; width:49%;">
+        <img src="img/rewards.jpg">
+    </div>
+</div>
+
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -247,12 +250,37 @@
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
     <script src="/js/submitscript.js"></script>
+    <!-- Script for Credit card validator -->
+    <script src="/js/jquery.creditCardValidator.js"></script>
 
     <!-- For the birthdate field datepicker -->
     <script>
     $(function() {
         $( "#InputBirthdateFirst" ).datepicker({changeYear: true, yearRange: "1901:2012"});
     });
+    </script>
+
+    <script>
+        $( "#InputCC" ).validateCreditCard(function(result)
+            {
+                //If credit card is mastercard
+                if (result.card_type.name == 'mastercard')
+                {
+                    //Show the mastercard image
+                    $("#InputCC").css("background-position","2px -247px, 260px -87px");
+                }
+                else if (result.card_type.name == 'visa')
+                {
+                	//show the visa image
+                    $("#InputCC").css("background-position","2px -163px, 260px -87px");
+                }
+                else if (result.card_type.name == 'discover')
+                {
+                	//show the discover image
+                    $("#InputCC").css("background-position","2px -331px, 260px -87px");
+                }
+            });
+
     </script>
 
   </body>

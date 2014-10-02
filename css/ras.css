@@ -1,0 +1,90 @@
+body {
+    font-family: "Trebuchet MS", sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+    background: #cccccc;
+    margin: 0;
+    padding: 0;
+}
+
+.footer 
+{
+     
+    height:30px;
+    margin: 10px 0px 10px 0px;
+    text-align: center;
+    background-color: #dff0d8;
+   
+}
+
+#wrap {
+    top: 0;
+    width: 98%;
+    height: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    background: #fff;
+    /*    padding: 20px;*/
+    //margin-left: 250px;
+}
+
+.mainContent
+{
+    border:1px solid #cccccc;
+    width: 100%;
+}
+.video { 
+    width: 400px; 
+    float: right;
+    margin: 20px ;
+    background: #fff;
+    padding: 20px;
+    border-color: black;
+    border-width: 5px;
+}
+.header {
+    /*background: #2C2D2F;*/
+    /*     background: url(/glynn/images/background.gif) repeat-x scroll left top transparent;*/
+    /*margin-left:167px;*/
+    height: 70px;
+    line-height: 48px;
+}
+
+#menu {
+    
+    background: #356AA0;
+    height: 30px;
+    line-height: 30px;
+    width:100%;
+}
+
+#menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0px;
+}
+#menu ul li {
+    display: block;
+    float: left;
+}
+#menu ul li a {
+    display: block;
+    padding: 0 10px 0 10px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+}
+#menu ul li a:hover {
+    color: #fff;
+    background: #CF4D4F;
+}
+
+li.selectedTab
+{
+        color: #fff;
+    background: #CF4D4F;
+}
+
+
+

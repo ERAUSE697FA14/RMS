@@ -37,6 +37,9 @@
     	$cc_expire=$_POST['InputCCExpire'];
     	$cc_cvv=$_POST['InputCCCVV'];
 
+        // Create a unique  activation code:
+        $activation = md5(uniqid(rand(), true));
+
     	//Check if the user's email address already exists:
         $db->where ("email", $email); //select all records that have the entered email...
         $users = $db->get ("user");          //pulls the records from the "user" table
@@ -52,7 +55,7 @@
         		'address_line_2' => $address_line2,
         		'city' => $city,
         		'state' => $state,
-        		'zip_code' => $zip_code,
+        		'zip_code' => $zip,
         		'birth_date' => $birthdate,
         		'reward_tier' => $tier,
         		'email' => $email,
@@ -60,10 +63,17 @@
         		'cc_number' => SHA1($cc_number),
         		'cc_expire' => $cc_expire,
         		'cc_cvv' => $cc_cvv,
+                'activation' => $activation,
         	);
         	$insert = $db->insert ('user', $data);
     		if ($insert) {
-    		    echo 'You have registered successfully! Welcome ' . $first_name;
+                $message = " To activate your account, please click the link below:\n\n";
+                $message .= 'http://rmsystem.org/activate.php?email=' . urlencode($email) . "&key=$activation";
+                mail($email, 'Rewards System Registration Confirmation', $message, 'From:'.NOREPLY);
+   
+                  // Flush the buffered output.
+
+    		    echo 'You have registered successfully! Please check your email address to activate your account.';
     		}
     		else{
     		    echo 'Registration Unsuccessful: ' . $db->getLastError();

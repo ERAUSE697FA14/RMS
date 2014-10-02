@@ -1,0 +1,60 @@
+body {
+    line-height: 1.5;
+    //background: #36393D;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    width:800px;
+    margin: 10px auto;
+    background: #ffe;
+   
+font-size: 30px;
+}
+
+
+.video { 
+    width: 400px; 
+        float: left;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+}
+
+.login {
+    width: 660px;
+    margin: 20px auto;
+   background: #fff;
+   //background: blue;
+    padding: 20px;
+    float: right;
+}
+
+#error_notification
+    {
+    border: 1px red solid;
+    height: auto;
+    padding: 4px;
+    background: #F8F0F1;
+    text-align: center;
+    -moz-border-radius: 5px;
+
+    }
+
+
+.tableBorder {
+	border:1px solid #cccccc;
+}
+
+
+.main
+{
+    border:1px solid #cccccc;
+    width: 658px;
+}
+
+.footer
+{
+    
+}

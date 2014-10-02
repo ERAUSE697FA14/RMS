@@ -7,11 +7,28 @@
 }*/
 
 .logo {
-	float:right;
+	float:none;
+	text-align: center;
 	margin-top: 12px;
 }
 .content-heading {
 	float:left;
 	margin-top: -9px;
 	margin-bottom: 10px;
+}
+.bigContainer {
+	width: 1070px;
+	margin-right: auto;
+	margin-left: auto;
+}
+/* Adding images to the credit card input */
+#InputCC {
+	background-image: url('/img/images.png');
+	background-position: 2px -121px, 260px -61px;
+	background-size: 120px 361px, 120px 361px;
+	background-repeat: no-repeat;
+	padding-left: 54px;
+}
+.mastercard {
+	background-position: 2px -247px, 260px -87px;
 }

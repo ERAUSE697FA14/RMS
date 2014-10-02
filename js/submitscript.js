@@ -57,7 +57,7 @@ $(document).ready(function(){
 		//Ensure CC number looks right...
 		else if (checkCC(cc_number) == false)
 		{
-			alert("Please make sure the credit card number is correct (no spaces)");
+			alert("Please make sure the credit card number is correct.");
 		}
 		//Ensure CC number looks right...
 		else if (checkExp(cc_expire) == false)
@@ -139,12 +139,12 @@ function checkZip(zip){
 }
 //Used to validate CC # (allows only numbers that match patterns of Visa, Mastercard, AmEx, Discover, JCB)
 function checkCC(cc_number){
-    var pattern = /(^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$)/;
+    /*var pattern = /(^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$)/;
     if(pattern.test(cc_number)){
         return true;
     }else{
         return false;
-    }
+    }*/
 }
 //Used to make sure expiration date is valid
 function normalizeYear(year){
@@ -181,6 +181,16 @@ function checkExp(cc_expire){
 function checkCVV(cc_cvv){
     var pattern = /^[0-9]{3,4}$/;
     if(pattern.test(cc_cvv)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//Used to validate CC number
+function checkCC(cc){
+    var pattern = /^((4\d{3})|(5[1-5]\d{2})|(6011)|(3[68]\d{2})|(30[012345]\d))[ -]?(\d{4})[ -]?(\d{4})[ -]?(\d{4}|3[4,7]\d{13})$/;
+    if(pattern.test(cc)){
         return true;
     }else{
         return false;
