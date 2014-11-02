@@ -1,6 +1,6 @@
 <?php
 require_once 'session.php';
-if($_SESSION['user_id'] != ""){
+if($_SESSION['admin_user_id'] != ""){
     
 }
 else{
@@ -23,11 +23,18 @@ $address_line_2=$_POST['address_line_2'];
 $city=$_POST['city'];
 $state=$_POST['state'];
 $zip=$_POST['zip'];
-$tier=$_POST['tier'];
+$reward_tier=$_POST['reward_tier'];
 $birthdate=$_POST['birthdate'];
 $cc_number=$_POST['cc_number'];
 $cc_expire=$_POST['cc_expire'];
 $cc_cvv=$_POST['cc_cvv'];
+
+
+$billing_address_line_1=$_POST['billing_address_line_1'];
+$billing_address_line_2=$_POST['billing_address_line_2'];
+$billing_city=$_POST['billing_city'];
+$billing_state=$_POST['billing_state'];
+$billing_zip=$_POST['billing_zip'];
 
 $role = "member";
 
@@ -43,12 +50,17 @@ $activation = md5(uniqid(rand(), true));
         		'state' => $state,
         		'zip_code' => $zip,
         		'birth_date' => $birthdate,
-        		'reward_tier' => $tier,
+        		'reward_tier' => $reward_tier,
         		'email' => $email,
         		'password' => SHA1($password),
         		'cc_number' => SHA1($cc_number),
         		'cc_expire' => $cc_expire,
         		'cc_cvv' => $cc_cvv,
+        		'billing_address_line_1' => $billing_address_line_1,
+        		'billing_address_line_2' => $billing_address_line_2,
+        		'billing_city' => $billing_city,
+        		'billing_state' => $billing_state,
+        		'billing_zip' => $billing_zip,
                 'activation' => $activation,
         	);
         	$insert = $db->insert ('user', $data);

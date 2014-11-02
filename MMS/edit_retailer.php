@@ -1,6 +1,6 @@
 <?php 
 require_once 'session.php';
-if($_SESSION['user_id'] != ""){
+if($_SESSION['admin_user_id'] != ""){
     
 }
 else{
@@ -20,13 +20,20 @@ unset($_SESSION['retailersfrom']);
 if($_SESSION['retailersfrom'] == 'retailersSearch'){
 $findRetailers = $_SESSION['retailersArray'];
 $isIndex = false;
-$maxindex = $_SESSION['number'];
+$maxindex = $_SESSION['retailersnumber'];
 unset($_SESSION['retailersArray']);
 unset($_SESSION['retailersfrom']);
-unset($_SESSION['etailersnumber']);
+unset($_SESSION['retailersnumber']);
 }
 
 ?> 
+<script>  
+    function closeSearch(){
+                $(".content").delay(300).animate({"marginTop" : 0});
+                $("#listInfo").fadeOut(500);
+                $("#nav").height($("#nav").height() -  $("#listInfo").height());
+    }
+</script>  
 
 <html lang="">
 <head>
@@ -45,14 +52,12 @@ unset($_SESSION['etailersnumber']);
 <div class="testing">
 <header class="main">
 	<h1><strong>MMS</strong> Dashboard</h1>
-	<input type="text" value="search" />
 </header>
 <section class="user">
 	<div class="profile-img">
                     <?php
                     //Variable initialization
                     session_start();
-                    $id = $_SESSION['user_id'];
                     $firstName = $_SESSION['user_firstname'];
                     $lastName = $_SESSION['user_lastname'];
                     $email = $_SESSION['user_email'];
@@ -69,33 +74,33 @@ unset($_SESSION['etailersnumber']);
 </div>
 <nav>
 	<ul>
-            <li><a href="mms.php"><span class="icon">&#128711;</span> <s>Dashboard</s></a></li>
+            <li><a href="mms.php"><span class="icon">&#128711;</span> Dashboard</a></li>
 		<li>
-			<a href="database.php"><span class="icon">&#128248;</span> <s>Database</s></a>
+			<a href="database.php"><span class="icon">&#128248;</span> Database</a>
 			<ul class="submenu">
-                                <li><a href="redundant_database.php"><s>View Redundant Database</s></a></li>
-				<li><a href="backup_restore.php"><s>Backup and Restore</s></a></li>
+                                <li><a href="redundant_database.php">View Redundant Database</a></li>
+				<li><a href="backup_restore.php">Backup and Restore</a></li>
 			</ul>	
 		</li>
 		<li>
 			<a href="member.php"><span class="icon">&#59170;</span> Members</a>
 			<ul class="submenu">
 				<li><a href="new_member.php">New Member</a></li>
-				<li><a href="find_member.php">Edit Members</a></li>
+				<li><a href="find_member.php">Find Members</a></li>
 			</ul>
 		</li>
                 <li class="section">
 			<a href="retailer.php"><span class="icon">&#59148;</span> Retailers</a>
 			<ul class="submenu">
 				<li><a href="new_retailer.php">New Retailer</a></li>
-				<li><a href="find_retailer.php">Edit Retailers</a></li>
+				<li><a href="find_retailer.php">Find Retailers</a></li>
 			</ul>
 		</li>
                 <li>
-			<a href="rewards.php"><span class="icon">&#127942;</span><s> Rewards</s></a>
+			<a href="rewards.php"><span class="icon">&#127942;</span> Rewards</a>
 			<ul class="submenu">
-				<li><a href="tiers_manage.php"><s>Tiers Management</s></a></li>
-                                <li><a href="coupons_manage.php"><s>Coupons Management</s></a></li>
+				<li><a href="tiers_manage.php">Tiers Management</a></li>
+                                <li><a href="coupons_manage.php">Coupons Management</a></li>
 			</ul>
 		</li>
                 <li>
@@ -109,11 +114,11 @@ unset($_SESSION['etailersnumber']);
                 </li>
 	</ul>
 </nav>
-<section class="alert">
-	<div class="green">	
-                <p><?php   if($isIndex) {echo "Select";} else{echo "Find";}
-                            if ($maxindex > 1) {echo " " . $maxindex . " retailers in the database.";}else {echo $maxindex . " retailer in the database.";}?></p>
-		<span class="close">&#10006;</span>
+<section class="top" id='listInfo'>
+	<div class="green">
+                <p><?php   if($isIndex) {echo "Select ";} else{echo "Find ";}
+                            if ($maxindex > 1) {echo " " . $maxindex . " retailers in the database.";}else if ($maxindex == 1) {echo $maxindex . " retailer in the database.";} else {echo $maxindex . " 0 retailer in the database.";}?></p>
+		<span class="close" id= "listInfoClose" onclick="closeSearch()">&#10006;</span>
 	</div>
 </section>
 <?php
@@ -132,7 +137,7 @@ if($isIndex){
 if ($index ==0){
 echo "<section class='content'>";}
 else{
-    echo "<section class='content' style='margin:0 0 0 210px;' >";
+    echo "<section class='content' style='margin-top: 0px;'>";
 }
 $index++;
         ?>
@@ -143,7 +148,9 @@ $index++;
 				<h1>Selected Retailer</h1>
 				<h2>a information panel</h2>
 			</hgroup>
-                        <span class="close" style="color: #ffffff; font-size: 34px; cursor: pointer; float: right;">&#10006;</span>
+                        <aside>
+                        <button class="closeProfile" name ="close">Close</button>
+                        </aside>
 		</header>
 		<div class="content">
                     <form method="post" action="mod_retailer.php">
@@ -165,7 +172,7 @@ $index++;
         if ($index ==0){
 echo "<section class='content'>";}
 else{
-    echo "<section class='content' style='margin:0 0 0 210px;' >";
+    echo "<section class='content' style='margin-top: 0px;'>";
 }
     ?>
 	<section class="widget">
@@ -224,10 +231,14 @@ else{
 <script src="js/flot-graphs.js"></script>
 <script src="js/cycle.js"></script>-->
 <script src="js/jquery.tablesorter.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$( "#tabs" ).tabs();
+<script>
+        $(".closeProfile").click(function(){
+		$(this).parent().parent().parent().parent().fadeOut(500);
+		$(".content").delay(300).animate({"marginTop" : 0});
+                $("#listInfo").fadeOut(500);
+                $("#nav").height($("#nav").height() - $(this).parent().parent().parent().parent().height() - $("#listInfo").height());
 	});
+
 </script>
 </body>
 </html>

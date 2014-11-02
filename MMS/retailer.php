@@ -1,6 +1,6 @@
 <?php 
 require_once 'session.php';
-if($_SESSION['user_id'] != ""){
+if($_SESSION['admin_user_id'] != ""){
     
 }
 else{
@@ -48,9 +48,21 @@ else if(isset($_POST['edit'])){
             header("Location:".$editRetailerPath);
 }
 }
+else if (isset($_POST['add'])){
+   
+            $addRetailerPath = '../MMS/ new_retailer.php';
+            header("Location:".$new_retailer.php);
+}
 ?>
 
 
+<script> 
+    function delcfm() { 
+        if (!confirm("Are you sure that you want to permanently delete the selected item(s)?")) { 
+            window.event.returnValue = false; 
+        } 
+    } 
+</script>
 <html lang="">
 <head>
 	<meta charset="utf-8">
@@ -67,14 +79,12 @@ else if(isset($_POST['edit'])){
 <div class="testing">
 <header class="main">
 	<h1><strong>MMS</strong> Dashboard</h1>
-	<input type="text" value="search" />
 </header>
 <section class="user">
 	<div class="profile-img">
                     <?php
                     //Variable initialization
                     session_start();
-                    $id = $_SESSION['user_id'];
                     $firstName = $_SESSION['user_firstname'];
                     $lastName = $_SESSION['user_lastname'];
                     $email = $_SESSION['user_email'];
@@ -90,33 +100,33 @@ else if(isset($_POST['edit'])){
 </div>
 <nav>
 	<ul>
-            <li><a href="mms.php"><span class="icon">&#128711;</span> <s>Dashboard</s></a></li>
+            <li><a href="mms.php"><span class="icon">&#128711;</span> Dashboard</a></li>
 		<li>
-			<a href="database.php"><span class="icon">&#128248;</span> <s>Database</s></a>
+			<a href="database.php"><span class="icon">&#128248;</span> Database</a>
 			<ul class="submenu">
-                                <li><a href="redundant_database.php"><s>View Redundant Database</s></a></li>
-				<li><a href="backup_restore.php"><s>Backup and Restore</s></a></li>
+                                <li><a href="redundant_database.php">View Redundant Database</a></li>
+				<li><a href="backup_restore.php">Backup and Restore</a></li>
 			</ul>	
 		</li>
 		<li>
 			<a href="member.php"><span class="icon">&#59170;</span> Members</a>
 			<ul class="submenu">
 				<li><a href="new_member.php">New Member</a></li>
-				<li><a href="find_member.php">Edit Members</a></li>
+				<li><a href="find_member.php">Find Members</a></li>
 			</ul>
 		</li>
                 <li class="section">
 			<a href="retailer.php"><span class="icon">&#59148;</span> Retailers</a>
 			<ul class="submenu">
 				<li><a href="new_retailer.php">New Retailer</a></li>
-				<li><a href="find_retailer.php">Edit Retailers</a></li>
+				<li><a href="find_retailer.php">Find Retailers</a></li>
 			</ul>
 		</li>
                 <li>
-			<a href="rewards.php"><span class="icon">&#127942;</span><s> Rewards</s></a>
+			<a href="rewards.php"><span class="icon">&#127942;</span> Rewards</a>
 			<ul class="submenu">
-				<li><a href="tiers_manage.php"><s>Tiers Management</s></a></li>
-                                <li><a href="coupons_manage.php"><s>Coupons Management</s></a></li>
+				<li><a href="tiers_manage.php">Tiers Management</a></li>
+                                <li><a href="coupons_manage.php">Coupons Management</a></li>
 			</ul>
 		</li>
                 <li>
@@ -131,14 +141,9 @@ else if(isset($_POST['edit'])){
 	</ul>
 </nav>
 
-<section class="alert">
-        	<form method="link" action="new_retailer.php">
-		 <button class="green">Add new retailer</button>
-                </form>
-
                  
-</section>
-<section class="content">
+<section class="content" style='margin-top: 0px;'>
+                           	<form method="post" action="retailer.php">
 	<section class="widget">
 		<header>
 			<span class="icon">&#128101;</span>
@@ -146,23 +151,18 @@ else if(isset($_POST['edit'])){
 				<h1>Retailers</h1>
 				<h2>a list of retailers</h2>
 			</hgroup>
-			<aside>
-				<span>
-					<a href="#">&#9881;</a>
-					<ul class="settings-dd">
-						<li><label>Edit Mode</label><input type="checkbox" /></li>
-						<li><label>Details</label><input type="checkbox" checked="checked" /></li>
-						<li><label>Password</label><input type="checkbox" /></li>
-					</ul>
-				</span>
-			</aside>
+                        <aside>
+                            <button class="green">Add</button>
+                            <button class="blue" name="edit">Edit</button>
+                            <button class="red" name="delete" onClick="delcfm()">Delete</button>
+                        </aside>
 		</header>
 		<div class="content">
-                       	<form method="post" action="retailer.php">
+
 			<table id="myTable" border="0" width="100">
 				<thead>
 					<tr>
-						<th>ID</th>
+						<th width="10%">ID</th>
 						<th>Name</th>
 						<th>Key</th>
 					</tr>
@@ -188,16 +188,9 @@ else if(isset($_POST['edit'])){
 				</table>
 		</div>
 	</section>
-</section>
-    <section class="alert">
-		 <button class="red" name="delete">Delete Selected Retailers</button>
-                 <button class="" name="edit">Edit Selected Retailers</button>
-                 <button class="orange" name="selectAll"><s>Select All Retailers</s></button>
 </form>
 </section>
-<section class="content">
-  <div class="widget-container">
-  </div>
+<section class="content" id= "foot" style='margin-top: 0px;'>
 	<div id="footer">
 		Copyright &copy; <a href="http://rmsystem.org">Rmsystem 2014</a> Theme powered by John Doe
   </div>

@@ -1,6 +1,6 @@
 <?php 
 require_once 'session.php';
-if($_SESSION['user_id'] != ""){
+if($_SESSION['admin_user_id'] != ""){
     
 }
 else{
@@ -23,6 +23,9 @@ if(isset($_POST['delete'])){
     header("Location:".$adminPath);
     
 }
+}else if(isset($_POST['new'])){
+        $newAdminPath = "../MMS/new_admin.php";
+        header("Location:".$newAdminPath);
 }
 ?> 
 
@@ -42,14 +45,12 @@ if(isset($_POST['delete'])){
 <div class="testing">
 <header class="main">
 	<h1><strong>MMS</strong> Dashboard</h1>
-	<!--<input type="text" value="search" />-->
 </header>
 <section class="user">
 	<div class="profile-img">
                     <?php
                     //Variable initialization
                     session_start();
-                    $id = $_SESSION['user_id'];
                     $firstName = $_SESSION['user_firstname'];
                     $lastName = $_SESSION['user_lastname'];
                     $email = $_SESSION['user_email'];
@@ -58,28 +59,6 @@ if(isset($_POST['delete'])){
 	</div>
 	<div class="buttons">
 		<button class="ico-font">&#9206;</button>
-		<!--<span class="button dropdown">
-			<a href="#">Inbox <span class="pip">6</span></a>
-			<ul class="notice">
-				<li>
-					<hgroup>
-						<h1>Hi, I need a favour</h1>
-						<h2>John Doe</h2>
-						<h3>Lorem ipsum dolor sit amet, consectetuer sed aidping putamus delo de sit felume...</h3>
-					</hgroup>
-					<p><span>11:24</span></p>
-				</li>
-				<li>
-					<hgroup>
-						<h1><span class="icon">&#59154;</span>Hi, I need a favour</h1>
-						<h2>John Doe</h2>
-						<h3>Lorem ipsum dolor sit amet, consectetuer sed aidping putamus delo de sit felume...</h3>
-					</hgroup>
-					<p><span>11:24</span></p>
-				</li>
-
-			</ul>
-		</span> -->
 		<span class="button">Help</span>
 		<span class="button blue"><a href="logout.php">Logout</a></span>
 	</div>
@@ -87,33 +66,33 @@ if(isset($_POST['delete'])){
 </div>
 <nav>
 	<ul>
-            <li class="section"><a href="mms.php"><span class="icon">&#128711;</span> <s>Dashboard</s></a></li>
+            <li><a href="mms.php"><span class="icon">&#128711;</span> Dashboard</a></li>
 		<li>
-			<a href="database.php"><span class="icon">&#128248;</span> <s>Database</s></a>
+			<a href="database.php"><span class="icon">&#128248;</span> Database</a>
 			<ul class="submenu">
-                                <li><a href="redundant_database.php"><s>View Redundant Database</s></a></li>
-				<li><a href="backup_restore.php"><s>Backup and Restore</s></a></li>
+                                <li><a href="redundant_database.php">View Redundant Database</a></li>
+				<li><a href="backup_restore.php">Backup and Restore</a></li>
 			</ul>	
 		</li>
 		<li>
 			<a href="member.php"><span class="icon">&#59170;</span> Members</a>
 			<ul class="submenu">
 				<li><a href="new_member.php">New Member</a></li>
-				<li><a href="find_member.php">Edit Members</a></li>
+				<li><a href="find_member.php">Find Members</a></li>
 			</ul>
 		</li>
                 <li>
 			<a href="retailer.php"><span class="icon">&#59148;</span> Retailers</a>
 			<ul class="submenu">
 				<li><a href="new_retailer.php">New Retailer</a></li>
-				<li><a href="find_retailer.php">Edit Retailers</a></li>
+				<li><a href="find_retailer.php">Find Retailers</a></li>
 			</ul>
 		</li>
                 <li>
-			<a href="rewards.php"><span class="icon">&#127942;</span><s> Rewards</s></a>
+			<a href="rewards.php"><span class="icon">&#127942;</span> Rewards</a>
 			<ul class="submenu">
-				<li><a href="tiers_manage.php"><s>Tiers Management</s></a></li>
-                                <li><a href="coupons_manage.php"><s>Coupons Management</s></a></li>
+				<li><a href="tiers_manage.php">Tiers Management</a></li>
+                                <li><a href="coupons_manage.php">Coupons Management</a></li>
 			</ul>
 		</li>
                 <li>
@@ -127,7 +106,8 @@ if(isset($_POST['delete'])){
                 </li>
 	</ul>
 </nav>
-<section class="content">
+<section class="content" style="margin-top: 0px;">
+                           	<form method="post" action="admin.php">
 	<section class="widget">
 		<header>
 			<span class="icon">&#128101;</span>
@@ -136,18 +116,12 @@ if(isset($_POST['delete'])){
 				<h2>a list of administrators (cannot delete current login account)</h2>
 			</hgroup>
 			<aside>
-				<span>
-					<a href="#">&#9881;</a>
-					<ul class="settings-dd">
-						<li><label>Edit Mode</label><input type="checkbox" /></li>
-						<li><label>Details</label><input type="checkbox" checked="checked" /></li>
-						<li><label>Password</label><input type="checkbox" /></li>
-					</ul>
-				</span>
+                            <button class="green" name="new">Add</button>          
+                            <button class="red" name="delete">Delete</button>
 			</aside>
 		</header>
 		<div class="content">
-                       	<form method="post" action="admin.php">
+
 			<table id="myTable" border="0" width="100">
 				<thead>
 					<tr>
@@ -171,7 +145,7 @@ if(isset($_POST['delete'])){
                                                 
                                                 echo "<tr>";
                                                 $id = $adminList[$index]['user_id'];
-                                                if($_SESSION['user_id'] != $id && $id != "49"){
+                                                if($_SESSION['admin_user_id'] != $id && $id != "49"){
                                                 echo "<td><input type='checkbox' name='selectedAdmin[]' value= $id />" . $adminList[$index]['user_id']. "</td>";}
                                                 else{
                                                     echo "<td><input type='checkbox' name='selectedAdmin[]' value= $id disabled />" . $adminList[$index]['user_id']. "</td>";
@@ -187,17 +161,14 @@ if(isset($_POST['delete'])){
 				</table>
 		</div>
 	</section>
+                                    </form>
+
 </section>
-    <section class="alert">
-		 <button class="red" name="delete">Delete Selected Administrator</button>
-</form>
-</section>
-<section class="content">
-  <div class="widget-container">
+
+<section class="content" id= "foot" style='margin-top: 0px;'>
+	<div id="footer">
+		Copyright &copy; <a href="http://rmsystem.org">Rmsystem 2014</a> Theme powered by John Doe
   </div>
-    		<div id="footer">
-                        Copyright &copy; <a href="http://rmsystem.org">Rmsystem 2014</a> Theme powered by John Doe
-		</div>
 </section>
 <script src="js/jquery-1.6.1.min.js"></script>
 <script src="js/jquery.wysiwyg.js"></script>

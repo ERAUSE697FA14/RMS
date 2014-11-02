@@ -1,6 +1,6 @@
 <?php 
 require_once 'session.php';
-if($_SESSION['user_id'] != ""){
+if($_SESSION['admin_user_id'] != ""){
     
 }
 else{
@@ -10,6 +10,7 @@ else{
 }
 ?> 
 
+<!DOCTYPE html>
 <html lang="">
 <head>
 	<meta charset="utf-8">
@@ -19,21 +20,18 @@ else{
 	<meta name="robots" content="" />
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 	<link rel="stylesheet" href="css/style.css" media="all" />
-	<!--[if IE]><link rel="stylesheet" href="css/ie.css" media="all" /><![endif]-->
-	<!--[if lt IE 9]><link rel="stylesheet" href="css/lt-ie-9.css" media="all" /><![endif]-->
+	<link rel="stylesheet" href="css/ui.css" media="all" />
 </head>
 <body>
 <div class="testing">
 <header class="main">
 	<h1><strong>MMS</strong> Dashboard</h1>
-	<!--<input type="text" value="search" />-->
 </header>
 <section class="user">
 	<div class="profile-img">
                     <?php
                     //Variable initialization
                     session_start();
-                    $id = $_SESSION['user_id'];
                     $firstName = $_SESSION['user_firstname'];
                     $lastName = $_SESSION['user_lastname'];
                     $email = $_SESSION['user_email'];
@@ -42,28 +40,6 @@ else{
 	</div>
 	<div class="buttons">
 		<button class="ico-font">&#9206;</button>
-		<!--<span class="button dropdown">
-			<a href="#">Inbox <span class="pip">6</span></a>
-			<ul class="notice">
-				<li>
-					<hgroup>
-						<h1>Hi, I need a favour</h1>
-						<h2>John Doe</h2>
-						<h3>Lorem ipsum dolor sit amet, consectetuer sed aidping putamus delo de sit felume...</h3>
-					</hgroup>
-					<p><span>11:24</span></p>
-				</li>
-				<li>
-					<hgroup>
-						<h1><span class="icon">&#59154;</span>Hi, I need a favour</h1>
-						<h2>John Doe</h2>
-						<h3>Lorem ipsum dolor sit amet, consectetuer sed aidping putamus delo de sit felume...</h3>
-					</hgroup>
-					<p><span>11:24</span></p>
-				</li>
-
-			</ul>
-		</span> -->
 		<span class="button">Help</span>
 		<span class="button blue"><a href="logout.php">Logout</a></span>
 	</div>
@@ -71,33 +47,33 @@ else{
 </div>
 <nav>
 	<ul>
-            <li><a href="mms.php"><span class="icon">&#128711;</span> <s>Dashboard</s></a></li>
+            <li><a href="mms.php"><span class="icon">&#128711;</span> Dashboard</a></li>
 		<li>
-			<a href="database.php"><span class="icon">&#128248;</span> <s>Database</s></a>
+			<a href="database.php"><span class="icon">&#128248;</span> Database</a>
 			<ul class="submenu">
-                                <li><a href="redundant_database.php"><s>View Redundant Database</s></a></li>
-				<li><a href="backup_restore.php"><s>Backup and Restore</s></a></li>
+                                <li><a href="redundant_database.php">View Redundant Database</a></li>
+				<li><a href="backup_restore.php">Backup and Restore</a></li>
 			</ul>	
 		</li>
 		<li>
 			<a href="member.php"><span class="icon">&#59170;</span> Members</a>
 			<ul class="submenu">
 				<li><a href="new_member.php">New Member</a></li>
-				<li><a href="find_member.php">Edit Members</a></li>
+				<li><a href="find_member.php">Find Members</a></li>
 			</ul>
 		</li>
                 <li>
 			<a href="retailer.php"><span class="icon">&#59148;</span> Retailers</a>
 			<ul class="submenu">
 				<li><a href="new_retailer.php">New Retailer</a></li>
-				<li><a href="find_retailer.php">Edit Retailers</a></li>
+				<li><a href="find_retailer.php">Find Retailers</a></li>
 			</ul>
 		</li>
                 <li class="section">
-			<a href="rewards.php"><span class="icon">&#127942;</span><s> Rewards</s></a>
+			<a href="rewards.php"><span class="icon">&#127942;</span> Rewards</a>
 			<ul class="submenu">
-				<li><a href="tiers_manage.php"><s>Tiers Management</s></a></li>
-                                <li><a href="coupons_manage.php"><s>Coupons Management</s></a></li>
+				<li><a href="tiers_manage.php">Tiers Management</a></li>
+                                <li><a href="coupons_manage.php">Coupons Management</a></li>
 			</ul>
 		</li>
                 <li>
@@ -112,23 +88,59 @@ else{
 	</ul>
 </nav>
 
-<!--<section class="alert">
-	<div class="green">	
-		<p>Hi Lee, you have <a href="#">3 new pages</a> and <a href="#">16 comments</a> to approve, better get going!</p>
-		<span class="close">&#10006;</span>
+<section class="content" style='margin-top: 0px;'>
+
+	<div class="widget-container">
+		<section class="widget small">
+			<header> 
+				<span class="icon">&#128269;</span>
+				<hgroup>
+					<h1>Tiers</h1>
+					<h2>redirect to tier page</h2>
+				</hgroup>
+			</header>
+                    <div class="content">
+				<section class="stats-wrapper">
+					<div class="stats" style = "width: 100%">
+                        <form method="post" action="tiers_manage.php">
+                                <button name="tiers" class="green" style = "margin:0 0 15px 0">Tiers</button>
+                        </form>
+					</div>
+				</section>
+			</div>
+		</section>
+		
+		<section class="widget 	small">
+			<header> 
+				<span class="icon">&#128269;</span>
+				<hgroup>
+					<h1>Coupons & Transactions</h1>
+					<h2>redirect to coupons and transaction page</h2>
+				</hgroup>
+			</header>
+			<div class="content">
+				<section class="stats-wrapper">
+					<div class="stats" style = "width: 100%">
+                        <form method="post" action="coupons_manage.php">
+                            <button name="coupons_transactions" class="green" style = "margin:0 0 15px 0">Coupons & Transactions</button>
+                        </form>
+					</div>
+				</section>
+			</div>
+		</section>
 	</div>
-</section>-->
-<section class="content">
-  <div class="widget-container">
+	
+</section>
+
+<section class="content" id= "foot" style='margin-top: 0px;'>
+	<div id="footer">
+		Copyright &copy; <a href="http://rmsystem.org">Rmsystem 2014</a> Theme powered by John Doe
   </div>
-    		<div id="footer">
-                        Copyright &copy; <a href="http://rmsystem.org">Rmsystem 2014</a> Theme powered by John Doe
-		</div>
 </section>
 <script src="js/jquery-1.6.1.min.js"></script>
 <script src="js/jquery.wysiwyg.js"></script>
 <script src="js/custom.js"></script>
-<script src="js/cycle.js"></script>
+<!--<script src="js/cycle.js"></script>-->
 <script src="js/jquery.checkbox.min.js"></script>
 <!--<script src="js/flot.js"></script>
 <script src="js/flot.resize.js"></script>
@@ -137,6 +149,7 @@ else{
 <script src="js/flot-graphs.js"></script>
 <script src="js/cycle.js"></script>-->
 <script src="js/jquery.tablesorter.min.js"></script>
+<script>
 
 </script>
 </body>

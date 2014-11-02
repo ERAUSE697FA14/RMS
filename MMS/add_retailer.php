@@ -1,6 +1,6 @@
 <?php
 require_once 'session.php';
-if($_SESSION['user_id'] != ""){
+if($_SESSION['admin_user_id'] != ""){
     
 }
 else{
@@ -21,7 +21,7 @@ $db = new MysqliDb(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
 
         	$data = Array(
         		'name' => $name,
-        		'private_key' => $private_key,
+        		'private_key' => SHA1($private_key),
         	);
         	$insert = $db->insert ('retailer', $data);
     		if ($insert) {

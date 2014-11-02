@@ -1,6 +1,6 @@
 <?php 
 require_once 'session.php';
-if($_SESSION['user_id'] != ""){
+if($_SESSION['admin_user_id'] != ""){
     
 }
 else{
@@ -8,18 +8,9 @@ else{
       header("Location:".$loginPath);
       exit;
 }
-require_once 'connectvars.php';
-
-$mysqliDbpath = $_SERVER{'DOCUMENT_ROOT'} ."/libs/MysqliDb.php";
-
-require_once ($mysqliDbpath);
-
-
-$db = new MysqliDb(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
 
 if(isset($_POST['delete'])){
-    $title = $_POST['title'];
-    $description = $_POST['description'];
+    
     if(!empty($_POST['selectedMembers'])) {
     foreach($_POST['selectedMembers'] as $value)
 {
@@ -28,7 +19,6 @@ if(isset($_POST['delete'])){
 
     $db->where ("user_id", $post_id);
     $db->delete("user");
-    
 
     }
     $memberPath = "../MMS/member.php";
@@ -37,20 +27,58 @@ if(isset($_POST['delete'])){
 }
 }
 else if(isset($_POST['edit'])){
-    $title = $_POST['title'];
-    $description = $_POST['description'];
     if(!empty($_POST['selectedMembers'])) {
             $postSelectedMembers = $_POST['selectedMembers'];
             session_start();
             $_SESSION['array'] = $postSelectedMembers;
             $_SESSION['from'] = 'list';
-            $editMemberPath = '../MMS/edit_member.php';
-            header("Location:".$editMemberPath);
+            $viewMemberPath = '../MMS/view_member.php';
+            header("Location:".$viewMemberPath);
 }
 }
+else if(isset($_POST['add'])){
+            $newMemberPath = '../MMS/new_member.php';
+            header("Location:".$newMemberPath);
+}
+else{
+    $mysqliDbpath = $_SERVER{'DOCUMENT_ROOT'} ."/libs/MysqliDb.php";
+    require_once ($mysqliDbpath);
+    require_once 'connectvars.php';
+    $role = "member";
+    $db = new MysqliDb(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+    $db->where ("role", $role);
+    $memberList = $db->get("user");
+    
+    if($_GET["page"] != ""){
+    $pagenumber = $_GET["page"];
+    $from = $pagenumber * 10;
+    if(($from + 10) > $db->count){
+      $to = $db->count;
+    }
+    else{
+      $to = $from + 10;
+    }
+}
+else{
+    $pagenumber = 0;
+    if($db->count < $to){
+    $to = $db->count;}
+    else{
+        $from = 0;
+        $to = $from + 10;
+    }
+}
+    }
 ?>
 
 
+<script> 
+    function delcfm() { 
+        if (!confirm("Are you sure that you want to permanently delete the selected item(s)?")) { 
+            window.event.returnValue = false; 
+        } 
+    } 
+</script>
 <html lang="">
 <head>
 	<meta charset="utf-8">
@@ -67,14 +95,12 @@ else if(isset($_POST['edit'])){
 <div class="testing">
 <header class="main">
 	<h1><strong>MMS</strong> Dashboard</h1>
-	<input type="text" value="search" />
 </header>
 <section class="user">
 	<div class="profile-img">
                     <?php
                     //Variable initialization
                     session_start();
-                    $id = $_SESSION['user_id'];
                     $firstName = $_SESSION['user_firstname'];
                     $lastName = $_SESSION['user_lastname'];
                     $email = $_SESSION['user_email'];
@@ -90,33 +116,33 @@ else if(isset($_POST['edit'])){
 </div>
 <nav>
 	<ul>
-            <li><a href="mms.php"><span class="icon">&#128711;</span> <s>Dashboard</s></a></li>
+            <li><a href="mms.php"><span class="icon">&#128711;</span> Dashboard</a></li>
 		<li>
-			<a href="database.php"><span class="icon">&#128248;</span> <s>Database</s></a>
+			<a href="database.php"><span class="icon">&#128248;</span> Database</a>
 			<ul class="submenu">
-                                <li><a href="redundant_database.php"><s>View Redundant Database</s></a></li>
-				<li><a href="backup_restore.php"><s>Backup and Restore</s></a></li>
+                                <li><a href="redundant_database.php">View Redundant Database</a></li>
+				<li><a href="backup_restore.php">Backup and Restore</a></li>
 			</ul>	
 		</li>
 		<li class="section">
 			<a href="member.php"><span class="icon">&#59170;</span> Members</a>
 			<ul class="submenu">
 				<li><a href="new_member.php">New Member</a></li>
-				<li><a href="find_member.php">Edit Members</a></li>
+				<li><a href="find_member.php">Find Members</a></li>
 			</ul>
 		</li>
                 <li>
 			<a href="retailer.php"><span class="icon">&#59148;</span> Retailers</a>
 			<ul class="submenu">
 				<li><a href="new_retailer.php">New Retailer</a></li>
-				<li><a href="find_retailer.php">Edit Retailers</a></li>
+				<li><a href="find_retailer.php">Find Retailers</a></li>
 			</ul>
 		</li>
                 <li>
-			<a href="rewards.php"><span class="icon">&#127942;</span><s> Rewards</s></a>
+			<a href="rewards.php"><span class="icon">&#127942;</span> Rewards</a>
 			<ul class="submenu">
-				<li><a href="tiers_manage.php"><s>Tiers Management</s></a></li>
-                                <li><a href="coupons_manage.php"><s>Coupons Management</s></a></li>
+				<li><a href="tiers_manage.php">Tiers Management</a></li>
+                                <li><a href="coupons_manage.php">Coupons Management</a></li>
 			</ul>
 		</li>
                 <li>
@@ -131,15 +157,9 @@ else if(isset($_POST['edit'])){
 	</ul>
 </nav>
 
-<section class="alert">
-        	<form method="link" action="new_member.php">
-		 <button class="green">Add new member</button>
-                </form>
-
-                 
-</section>
-<section class="content">
+<section class="content" style='margin-top: 0px;'>
 	<section class="widget">
+            <form method="post" action="member.php">
 		<header>
 			<span class="icon">&#128101;</span>
 			<hgroup>
@@ -147,65 +167,54 @@ else if(isset($_POST['edit'])){
 				<h2>a list of members</h2>
 			</hgroup>
 			<aside>
-				<span>
-					<a href="#">&#9881;</a>
-					<ul class="settings-dd">
-						<li><label>Edit Mode</label><input type="checkbox" /></li>
-						<li><label>Details</label><input type="checkbox" checked="checked" /></li>
-						<li><label>Password</label><input type="checkbox" /></li>
-					</ul>
-				</span>
+                                    <button class="green" name ="add">Add</button>
+                                    <button class="blue" name="edit">View/Edit</button>
+                                    <button class="red" name="delete" onClick="delcfm()">Delete</button>
 			</aside>
 		</header>
 		<div class="content">
-                       	<form method="post" action="member.php">
 			<table id="myTable" border="0" width="100">
 				<thead>
 					<tr>
-						<th>ID</th>
-						<th>First Name</th>
-						<th>Last Name</th>
+						<th width="10%">ID</th>
+						<th>Name</th>
                                                 <th>Email</th>
 						<th>Points</th>
 						<th>Tier</th>
+                                                <th>City, State</th>
 					</tr>
 				</thead>
 					<tbody>
                                             <?php
-                                            $mysqliDbpath = $_SERVER{'DOCUMENT_ROOT'} ."/libs/MysqliDb.php";
-                                            require_once ($mysqliDbpath);
-                                            require_once 'connectvars.php';
-                                            $role = "member";
-                                            $db = new MysqliDb(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-                                            $db->where ("role", $role);
-                                            $memberList = $db->get("user");
-                                            $index = $db->count;
-                                            for($index = 0;$index < $db->count;$index++){
+                                            for($index = $from;$index < $to;$index++){
                                                 echo "<tr>";
                                                 $id = $memberList[$index]['user_id'];
                                                 echo "<td><input type='checkbox' name='selectedMembers[]' value= $id />" . $memberList[$index]['user_id']. "</td>";
-                                                echo "<td>" . $memberList[$index]['first_name'] . "</td>";
-                                                echo "<td>" . $memberList[$index]['last_name'] . "</td>";
+                                                echo "<td>" . $memberList[$index]['first_name']." ". $memberList[$index]['last_name'] . "</td>";
                                                 echo "<td>" . $memberList[$index]['email'] . "</td>";
                                                 echo "<td>" . $memberList[$index]['reward_points'] . "</td>";
                                                 echo "<td>" . $memberList[$index]['reward_tier'] . "</td>";
+                                                echo "<td>" . $memberList[$index]['city']. ", ".$memberList[$index]['state'] . "</td>";
                                                 echo "</tr>";
                                                 }
                                             ?>
 					</tbody>
 				</table>
 		</div>
+            </form>
 	</section>
-</section>
-    <section class="alert">
-		 <button class="red" name="delete">Delete Selected Members</button>
-                 <button class="" name="edit">Edit Selected Members</button>
-                 <button class="orange" name="selectAll"><s>Select All Members</s></button>
-</form>
-</section>
-<section class="content">
-  <div class="widget-container">
+	<div style='float:left'>
+
+		<?php  echo "Page: ";echo $pagenumber+1; ?>
   </div>
+    	<div style='float:right'>
+                            <?php if($pagenumber > 0){ $nextpagenumber = $pagenumber -1; echo " <a href= 'member.php?page=".$nextpagenumber ."'><button name='last' class='orange'  >Last 10 records</button></a>";} ?>
+                            
+                            <?php if($db->count > $to){$nextpagenumber = $pagenumber +1; echo "<a href= 'member.php?page=".$nextpagenumber."'> <button name='next' class='green'>Next 10 records</button></a>";} ?>
+          
+  </div>
+</section>
+<section class="content" style='margin-top: 0px;'>
 	<div id="footer">
 		Copyright &copy; <a href="http://rmsystem.org">Rmsystem 2014</a> Theme powered by John Doe
   </div>
@@ -222,7 +231,5 @@ else if(isset($_POST['edit'])){
 <script src="js/flot-graphs.js"></script>
 <script src="js/cycle.js"></script>-->
 <script src="js/jquery.tablesorter.min.js"></script>
-<script type="text/javascript">
-</script>
 </body>
 </html>

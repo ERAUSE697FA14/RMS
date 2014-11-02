@@ -1,6 +1,6 @@
 <?php 
 require_once 'session.php';
-if($_SESSION['user_id'] != ""){
+if($_SESSION['admin_user_id'] != ""){
     
 }
 else{
@@ -28,14 +28,12 @@ else{
 <div class="testing">
 <header class="main">
 	<h1><strong>MMS</strong> Dashboard</h1>
-	<input type="text" value="search" />
 </header>
 <section class="user">
 	<div class="profile-img">
                     <?php
                     //Variable initialization
                     session_start();
-                    $id = $_SESSION['user_id'];
                     $firstName = $_SESSION['user_firstname'];
                     $lastName = $_SESSION['user_lastname'];
                     $email = $_SESSION['user_email'];
@@ -51,33 +49,33 @@ else{
 </div>
 <nav>
 	<ul>
-            <li><a href="mms.php"><span class="icon">&#128711;</span> <s>Dashboard</s></a></li>
+            <li><a href="mms.php"><span class="icon">&#128711;</span> Dashboard</a></li>
 		<li>
-			<a href="database.php"><span class="icon">&#128248;</span> <s>Database</s></a>
+			<a href="database.php"><span class="icon">&#128248;</span> Database</a>
 			<ul class="submenu">
-                                <li><a href="redundant_database.php"><s>View Redundant Database</s></a></li>
-				<li><a href="backup_restore.php"><s>Backup and Restore</s></a></li>
+                                <li><a href="redundant_database.php">View Redundant Database</a></li>
+				<li><a href="backup_restore.php">Backup and Restore</a></li>
 			</ul>	
 		</li>
 		<li class="section">
 			<a href="member.php"><span class="icon">&#59170;</span> Members</a>
 			<ul class="submenu">
 				<li><a href="new_member.php">New Member</a></li>
-				<li><a href="find_member.php">Edit Members</a></li>
+				<li><a href="find_member.php">Find Members</a></li>
 			</ul>
 		</li>
                 <li>
 			<a href="retailer.php"><span class="icon">&#59148;</span> Retailers</a>
 			<ul class="submenu">
 				<li><a href="new_retailer.php">New Retailer</a></li>
-				<li><a href="find_retailer.php">Edit Retailers</a></li>
+				<li><a href="find_retailer.php">Find Retailers</a></li>
 			</ul>
 		</li>
                 <li>
-			<a href="rewards.php"><span class="icon">&#127942;</span><s> Rewards</s></a>
+			<a href="rewards.php"><span class="icon">&#127942;</span> Rewards</a>
 			<ul class="submenu">
-				<li><a href="tiers_manage.php"><s>Tiers Management</s></a></li>
-                                <li><a href="coupons_manage.php"><s>Coupons Management</s></a></li>
+				<li><a href="tiers_manage.php">Tiers Management</a></li>
+                                <li><a href="coupons_manage.php">Coupons Management</a></li>
 			</ul>
 		</li>
                 <li>
@@ -92,7 +90,7 @@ else{
 	</ul>
 </nav>
 
-<section class="content" style="margin:0 0 0 210px;">
+<section class="content" style='margin-top: 0px;'>
     <section class="widget">
 			<header> 
 				<span class="icon">&#128269;</span>
@@ -100,16 +98,6 @@ else{
 					<h1>Find Members</h1>
 					<h2>type in conditions</h2>
 				</hgroup>
-				<aside>
-					<span>
-						<a href="#">&#9881;</a>
-						<ul class="settings-dd">
-							<li><label>Option a</label><input type="checkbox" /></li>
-							<li><label>Option b</label><input type="checkbox" checked="checked" /></li>
-							<li><label>Option c</label><input type="checkbox" /></li>
-						</ul>
-					</span>
-				</aside>
 			</header>
                         <form method="post" action="search.php">
 			<div class="content no-padding timeline">
@@ -117,13 +105,28 @@ else{
 					<span class="icon">&#59170;</span>
                                         <p>ID: <input name="user_id" type="text" value=""/></p>
 				</div>
+                            	<div class="tl-post">
+					<span class="icon">&#59170;</span>
+                                        <p>First Name: <input name="user_first_name" type="text" value=""/></p>
+				</div>
+                                <div class="tl-post">
+					<span class="icon">&#59170;</span>
+                                        <p>Last Name: <input name="user_last_name" type="text" value=""/></p>
+				</div>
 				<div class="tl-post">
 					<span class="icon">&#9993;</span>
 					<p>Email: <input name="email" type="text" value=""/></p>
 				</div>
 				<div class="tl-post">
 					<span class="icon">&#59197;</span>
-					<p>Tier: <input name="tier" type="text" value=""/></p>
+					<p>Tier: 
+                                <select class ="style" name="tier">
+                                    <option value="value">Value (Free! 1X points)</option>
+                                    <option value="gold">Gold ($50/year, 2X points)</option>
+                                    <option value="platinum">Platinum ($100/year, 3X points)</option>
+                                    <option value="prestige">Prestige ($150/year, 4X points)</option> 
+                                </select></p>
+                                        
 				</div>
                             <div align="right">
                                 <button name="search" class="green" style = "margin:0 0 15px 0">Search</button> <button name="reset" class="">Reset</button>
@@ -134,9 +137,7 @@ else{
 </section>
 
     
-<section class="content">
-  <div class="widget-container">
-  </div>
+<section class="content" id= "foot" style='margin-top: 0px;'>
 	<div id="footer">
 		Copyright &copy; <a href="http://rmsystem.org">Rmsystem 2014</a> Theme powered by John Doe
   </div>
@@ -154,9 +155,7 @@ else{
 <script src="js/cycle.js"></script>-->
 <script src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
-	$(function() {
-		$( "#tabs" ).tabs();
-	});
+
 </script>
 </body>
 </html>

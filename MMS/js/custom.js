@@ -12,10 +12,11 @@ $(document).ready(function() {
 	$("ul li a:contains('Settings')").addClass("settings").attr('title', 'Settings');
 	
 	
-	$("nav").height($(document).height());
+	//$("nav").height($(document).body.clientWidth);
 	
 	// Add class to last list item of submenu	
 	$("ul.submenu li:last-child").addClass("last");
+        $("ul.submenu_show li:last-child").addClass("last");
 	
 	
 	// Append Plus icon on thumbnail hover
@@ -58,6 +59,7 @@ $(document).ready(function() {
 	$(".close").click(function(){
 		$(this).parent().parent().fadeOut(500);
 		$(".content").delay(300).animate({"marginTop" : 0});
+
 	});
         
 	// Navigation accordion menu
@@ -67,6 +69,17 @@ $(document).ready(function() {
 				$(this).find("ul.submenu").stop("true", "true").slideDown(500);
 			}, function(){
 				$(this).find("ul.submenu").stop("true", "true").delay(100).slideUp(500);
+			});
+		} else {
+			$("nav ul li ul").empty();
+		}
+	});
+        $(window).bind("load resize", function(){
+		if ($("nav").width() > 100) {
+			$("nav ul li:has(ul)").hover(function(){
+				$(this).find("ul.submenu_show").stop("true", "true").slideDown(500);
+			}, function(){
+				//$(this).find("ul.submenu").stop("true", "true").delay(100).slideUp(500);
 			});
 		} else {
 			$("nav ul li ul").empty();

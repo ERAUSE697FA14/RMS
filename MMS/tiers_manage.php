@@ -1,12 +1,30 @@
 <?php 
 require_once 'session.php';
-if($_SESSION['user_id'] != ""){
+if($_SESSION['admin_user_id'] != ""){
     
 }
 else{
       $loginPath = "login.php";
       header("Location:".$loginPath);
       exit;
+}
+require_once 'connectvars.php';
+
+$mysqliDbpath = $_SERVER{'DOCUMENT_ROOT'} ."/libs/MysqliDb.php";
+
+require_once ($mysqliDbpath);
+
+
+$db = new MysqliDb(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+
+if(isset($_POST['edit'])){
+    if(!empty($_POST['selectedTier'])) {
+            $postSelectedTier = $_POST['selectedTier'];
+            session_start();
+            $_SESSION['selectedTier'] = $postSelectedTier;
+            $editTierPath = '../MMS/edit_tier.php';
+            header("Location:".$editTierPath);
+}
 }
 ?> 
 
@@ -26,14 +44,12 @@ else{
 <div class="testing">
 <header class="main">
 	<h1><strong>MMS</strong> Dashboard</h1>
-	<!--<input type="text" value="search" />-->
 </header>
 <section class="user">
 	<div class="profile-img">
                     <?php
                     //Variable initialization
                     session_start();
-                    $id = $_SESSION['user_id'];
                     $firstName = $_SESSION['user_firstname'];
                     $lastName = $_SESSION['user_lastname'];
                     $email = $_SESSION['user_email'];
@@ -42,28 +58,7 @@ else{
 	</div>
 	<div class="buttons">
 		<button class="ico-font">&#9206;</button>
-		<!--<span class="button dropdown">
-			<a href="#">Inbox <span class="pip">6</span></a>
-			<ul class="notice">
-				<li>
-					<hgroup>
-						<h1>Hi, I need a favour</h1>
-						<h2>John Doe</h2>
-						<h3>Lorem ipsum dolor sit amet, consectetuer sed aidping putamus delo de sit felume...</h3>
-					</hgroup>
-					<p><span>11:24</span></p>
-				</li>
-				<li>
-					<hgroup>
-						<h1><span class="icon">&#59154;</span>Hi, I need a favour</h1>
-						<h2>John Doe</h2>
-						<h3>Lorem ipsum dolor sit amet, consectetuer sed aidping putamus delo de sit felume...</h3>
-					</hgroup>
-					<p><span>11:24</span></p>
-				</li>
 
-			</ul>
-		</span> -->
 		<span class="button">Help</span>
 		<span class="button blue"><a href="logout.php">Logout</a></span>
 	</div>
@@ -71,33 +66,33 @@ else{
 </div>
 <nav>
 	<ul>
-            <li><a href="mms.php"><span class="icon">&#128711;</span> <s>Dashboard</s></a></li>
+            <li><a href="mms.php"><span class="icon">&#128711;</span> Dashboard</a></li>
 		<li>
-			<a href="database.php"><span class="icon">&#128248;</span> <s>Database</s></a>
+			<a href="database.php"><span class="icon">&#128248;</span> Database</a>
 			<ul class="submenu">
-                                <li><a href="redundant_database.php"><s>View Redundant Database</s></a></li>
-				<li><a href="backup_restore.php"><s>Backup and Restore</s></a></li>
+                                <li><a href="redundant_database.php">View Redundant Database</a></li>
+				<li><a href="backup_restore.php">Backup and Restore</a></li>
 			</ul>	
 		</li>
 		<li>
 			<a href="member.php"><span class="icon">&#59170;</span> Members</a>
 			<ul class="submenu">
 				<li><a href="new_member.php">New Member</a></li>
-				<li><a href="find_member.php">Edit Members</a></li>
+				<li><a href="find_member.php">Find Members</a></li>
 			</ul>
 		</li>
                 <li>
 			<a href="retailer.php"><span class="icon">&#59148;</span> Retailers</a>
 			<ul class="submenu">
 				<li><a href="new_retailer.php">New Retailer</a></li>
-				<li><a href="find_retailer.php">Edit Retailers</a></li>
+				<li><a href="find_retailer.php">Find Retailers</a></li>
 			</ul>
 		</li>
                 <li class="section">
-			<a href="rewards.php"><span class="icon">&#127942;</span><s> Rewards</s></a>
+			<a href="rewards.php"><span class="icon">&#127942;</span> Rewards</a>
 			<ul class="submenu">
-				<li><a href="tiers_manage.php"><s>Tiers Management</s></a></li>
-                                <li><a href="coupons_manage.php"><s>Coupons Management</s></a></li>
+				<li><a href="tiers_manage.php">Tiers Management</a></li>
+                                <li><a href="coupons_manage.php">Coupons Management</a></li>
 			</ul>
 		</li>
                 <li>
@@ -111,19 +106,59 @@ else{
                 </li>
 	</ul>
 </nav>
+<section class="content" style='margin-top: 0px;'>
+<form method="post" action="tiers_manage.php">
+	<section class="widget">
+		<header>
+			<span class="icon">&#127942;</span>
+			<hgroup>
+				<h1>Tiers</h1>
+				<h2>a list of tiers in system</h2>
+			</hgroup>
+			<aside>
+                        <button class="orange" name="edit">Edit</button>
+			</aside>
+		</header>
+		<div class="content">
 
-<!--<section class="alert">
-	<div class="green">	
-		<p>Hi Lee, you have <a href="#">3 new pages</a> and <a href="#">16 comments</a> to approve, better get going!</p>
-		<span class="close">&#10006;</span>
-	</div>
-</section>-->
-<section class="content">
-  <div class="widget-container">
-  </div>
-    		<div id="footer">
-                        Copyright &copy; <a href="http://rmsystem.org">Rmsystem 2014</a> Theme powered by John Doe
+			<table id="myTable" border="0" width="100">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Multiplier</th>
+                                                <th>Enroll Bonus</th>
+                                                <th>Yearly Fee</th>
+					</tr>
+				</thead>
+					<tbody>
+                                            <?php
+                                            $mysqliDbpath = $_SERVER{'DOCUMENT_ROOT'} ."/libs/MysqliDb.php";
+                                            require_once ($mysqliDbpath);
+                                            require_once 'connectvars.php';
+                                            $db = new MysqliDb(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+                                            $tierList = $db->get("tier");
+                                            $index = $db->count;
+                                            for($index = 0;$index < $db->count;$index++){
+                                                echo "<tr>";
+                                                $id = $tierList[$index]['tier_id'];
+                                                echo "<td><input type='radio' name='selectedTier'value= $id />" . $tierList[$index]['name'] . "</td>";
+                                                echo "<td>" . $tierList[$index]['multiplier'] . "</td>";
+                                                echo "<td>" . $tierList[$index]['enroll_bonus'] . "</td>";
+                                                echo "<td>" . $tierList[$index]['yearly_fee'] . "</td>";
+                                                echo "</tr>";
+                                                }
+                                            ?>
+					</tbody>
+				</table>
 		</div>
+	</section>
+    </form>
+</section>
+
+<section class="content" id= "foot" style='margin-top: 0px;'>
+	<div id="footer">
+		Copyright &copy; <a href="http://rmsystem.org">Rmsystem 2014</a> Theme powered by John Doe
+  </div>
 </section>
 <script src="js/jquery-1.6.1.min.js"></script>
 <script src="js/jquery.wysiwyg.js"></script>
@@ -137,7 +172,6 @@ else{
 <script src="js/flot-graphs.js"></script>
 <script src="js/cycle.js"></script>-->
 <script src="js/jquery.tablesorter.min.js"></script>
-
 </script>
 </body>
 </html>

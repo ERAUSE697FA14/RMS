@@ -1,6 +1,6 @@
 <?php 
 require_once 'session.php';
-if($_SESSION['user_id'] != ""){
+if($_SESSION['admin_user_id'] != ""){
     
 }
 else{
@@ -16,8 +16,6 @@ require_once 'connectvars.php';
 $mysqliDbpath = $_SERVER{'DOCUMENT_ROOT'} ."/libs/MysqliDb.php";
 require_once ($mysqliDbpath);
 $db = new MysqliDb(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-$db->where ("media_id", $media_id);
-$media = $db -> getOne("media");
    if($_POST['value'] !="" ){
             $tableData['value'] = trim($_POST['value']);
     }
@@ -57,14 +55,12 @@ unset($_SESSION['selectedMedia']);
 <div class="testing">
 <header class="main">
 	<h1><strong>MMS</strong> Dashboard</h1>
-	<input type="text" value="search" />
 </header>
 <section class="user">
 	<div class="profile-img">
                     <?php
                     //Variable initialization
                     session_start();
-                    $id = $_SESSION['user_id'];
                     $firstName = $_SESSION['user_firstname'];
                     $lastName = $_SESSION['user_lastname'];
                     $email = $_SESSION['user_email'];
@@ -81,33 +77,33 @@ unset($_SESSION['selectedMedia']);
 </div>
 <nav>
 	<ul>
-            <li><a href="mms.php"><span class="icon">&#128711;</span> <s>Dashboard</s></a></li>
+            <li><a href="mms.php"><span class="icon">&#128711;</span> Dashboard</a></li>
 		<li>
-			<a href="database.php"><span class="icon">&#128248;</span> <s>Database</s></a>
+			<a href="database.php"><span class="icon">&#128248;</span> Database</a>
 			<ul class="submenu">
-                                <li><a href="redundant_database.php"><s>View Redundant Database</s></a></li>
-				<li><a href="backup_restore.php"><s>Backup and Restore</s></a></li>
+                                <li><a href="redundant_database.php">View Redundant Database</a></li>
+				<li><a href="backup_restore.php">Backup and Restore</a></li>
 			</ul>	
 		</li>
 		<li>
 			<a href="member.php"><span class="icon">&#59170;</span> Members</a>
 			<ul class="submenu">
 				<li><a href="new_member.php">New Member</a></li>
-				<li><a href="find_member.php">Edit Members</a></li>
+				<li><a href="find_member.php">Find Members</a></li>
 			</ul>
 		</li>
                 <li>
 			<a href="retailer.php"><span class="icon">&#59148;</span> Retailers</a>
 			<ul class="submenu">
 				<li><a href="new_retailer.php">New Retailer</a></li>
-				<li><a href="find_retailer.php">Edit Retailers</a></li>
+				<li><a href="find_retailer.php">Find Retailers</a></li>
 			</ul>
 		</li>
                 <li>
-			<a href="rewards.php"><span class="icon">&#127942;</span><s> Rewards</s></a>
+			<a href="rewards.php"><span class="icon">&#127942;</span> Rewards</a>
 			<ul class="submenu">
-				<li><a href="tiers_manage.php"><s>Tiers Management</s></a></li>
-                                <li><a href="coupons_manage.php"><s>Coupons Management</s></a></li>
+				<li><a href="tiers_manage.php">Tiers Management</a></li>
+                                <li><a href="coupons_manage.php">Coupons Management</a></li>
 			</ul>
 		</li>
                 <li class="section">
@@ -130,7 +126,8 @@ $db = new MysqliDb(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
              $db->where ("media_id", $selectedMedia.$value);
              $media = $db->getOne("media");
     ?>
-<section class="content" style="margin:0 0 0 210px;" >
+<section class="content" style='margin-top: 0px;' >
+                        <form method="post" action="edit_media.php">
 	<section class="widget">
 		<header>
 			<span class="icon">&#127916;</span>
@@ -138,33 +135,25 @@ $db = new MysqliDb(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
 				<h1>Selected Media</h1>
 				<h2>a information panel</h2>
 			</hgroup>
-			<aside>
-				<span>
-					<a href="#">&#9881;</a>
-					<ul class="settings-dd">
-						<li><label>Option a</label><input type="checkbox" /></li>
-						<li><label>Option b</label><input type="checkbox" checked="checked" /></li>
-						<li><label>Option c</label><input type="checkbox" /></li>
-					</ul>
-				</span>
-			</aside>
+                        <aside>
+                        <button type="add" class="green" name ="apply">Apply</button>
+                        </aside>
 		</header>
 		<div class="content">
-                    <form method="post" action="edit_media.php">
+
                                 <p>ID: <?php echo $media['media_id'];session_start();$_SESSION['mediapassid'] = $media['media_id'];?></p>
-                                <p>Name:<?php echo $media['location'];?></p>
+                                <p>Name:<?php echo $media['name'];?></p>
                                 <p>Path:</p><input name="value" type="text"value = "<?php echo $media['value'];?> "/>
 			<div align="right">
-			<button type="add" class="green" name ="apply">Apply</button>
+			
                         </div>
-                    </form>
+
                         </div>
 	</section>
+                                                </form>
 </section>
     
-<section class="content">
-  <div class="widget-container">
-  </div>
+<section class="content" id= "foot" style='margin-top: 0px;'>
 	<div id="footer">
 		Copyright &copy; <a href="http://rmsystem.org">Rmsystem 2014</a> Theme powered by John Doe
   </div>
@@ -182,9 +171,7 @@ $db = new MysqliDb(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
 <script src="js/cycle.js"></script>-->
 <script src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
-	$(function() {
-		$( "#tabs" ).tabs();
-	});
+
 </script>
 </body>
 </html>

@@ -10,18 +10,18 @@ $mysqliDbpath = $_SERVER{'DOCUMENT_ROOT'} ."/libs/MysqliDb.php";
 require_once ($mysqliDbpath);
 require_once 'connectvars.php';
 
-if (!isSet($_SESSION['user_id'])) 
+if (!isSet($_SESSION['admin_user_id'])) 
 {
-    $_SESSION['user_id'] = "";
-    $user_id = "";
+    $_SESSION['admin_user_id'] = "";
+    $admin_user_id = "";
 } 
 else 
 {
-    $user_id = $_SESSION['user_id'];
+    $admin_user_id = $_SESSION['admin_user_id'];
 }
 
 
-if ($user_id != "") {
+if ($admin_user_id != "") {
     $db = new MysqliDb(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
     
     $db->where ("user_id", $userid);
@@ -30,12 +30,12 @@ if ($user_id != "") {
 
     if ($db->count > 0) 
     {
-        $_SESSION['user_id'] = $user_id;
+        $_SESSION['admin_user_id'] = $admin_user_id;
     }
     else 
     {
-        $_SESSION['user_id'] = "";
-        $user_id = "";
+        $_SESSION['admin_user_id'] = "";
+        $admin_user_id = "";
         session_destroy();
     }
 }
