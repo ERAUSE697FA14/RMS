@@ -145,16 +145,6 @@ $activation = md5(uniqid(rand(), true));
 				<h1>New Administrator</h1>
 				<h2>a information panel</h2>
 			</hgroup>
-			<aside>
-				<span>
-					<a href="#">&#9881;</a>
-					<ul class="settings-dd">
-						<li><label>Option a</label><input type="checkbox" /></li>
-						<li><label>Option b</label><input type="checkbox" checked="checked" /></li>
-						<li><label>Option c</label><input type="checkbox" /></li>
-					</ul>
-				</span>
-			</aside>
 		</header>
 		<div class="content">
                     <form method="post" action="new_admin.php">

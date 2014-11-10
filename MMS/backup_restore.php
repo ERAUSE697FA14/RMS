@@ -8,8 +8,6 @@ else{
       header("Location:".$loginPath);
       exit;
 }
-                //$mySQLDumperPath = "./mysqldumper/index.php";
-         //header("Location:".$mySQLDumperPath);
 ?>
 
 <html lang="">
@@ -104,6 +102,9 @@ else{
                     <iframe width="100%" height="100%" src="mysqldumper/index.php">
   <p>Your browser does not support iframes.</p>
 </iframe> 
+                <div style='margin-top: 5px; margin-left: 6px; margin-bottom:5px; float:left'>
+		  Notice: You need to restore triggers manually, please read administrator's manual for details.
+                 </div>
 		</div>
 	</section>
 </section>

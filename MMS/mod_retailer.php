@@ -34,7 +34,7 @@ if (isSet($_POST['apply']))
             $tableData['name'] = $retailer["name"];
     }
     if($_POST['private_key'] !="" ){
-        $tableData['private_key'] = trim($_POST['private_key']);
+        $tableData['private_key'] = SHA1(trim($_POST['private_key']));
     }    else{
             $tableData['private_key'] = $retailer["private_key"];
     }

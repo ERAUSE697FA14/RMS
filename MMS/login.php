@@ -55,7 +55,7 @@ else{
                     ?>
                     <script>
                         var code = "<?php echo $captcha." + ". $code ?>";
-                    alert("ERROR002:The captcha code you entered is incorrect.");
+                    alert("ERROR003:The captcha code you entered is incorrect.");
                     </script>
                     <?php 
                 }
@@ -90,6 +90,25 @@ else{
     }
 }
 ?> 
+                
+<script type="text/javascript">
+        
+    var Sys = {};
+    var ua = navigator.userAgent.toLowerCase();
+    var s;
+    (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? Sys.ie = s[1] :
+    (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+    (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+    (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+    (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+    (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+    if (Sys.ie){ 
+        if(parseFloat(Sys.ie) < 9.0 ){ 
+            alert("Your browser is not suppoerted!");
+            top.location='http://browsehappy.com/'; }
+        }
+</script>            
+                          
 <html lang="">
 <head>
 	<meta charset="utf-8">
@@ -125,7 +144,7 @@ else{
                         
 			<button name="login" class="blue">Login</button>
 		</form>
-		<p><a href="#">Forgot your password?</a></p>
+		<p><a href="mailto:admin@rmsystem.org?subject=Admin%20Password%20Reset&body=Please include your name, account and contact in this email.">Forgot your password?</a></p>
 	</section>
         <div id="footer">
                         <p>Copyright &copy; <a href="http://rmsystem.org">Rmsystem 2014</a></p>

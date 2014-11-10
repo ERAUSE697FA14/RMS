@@ -226,10 +226,10 @@ else{
                                 <p>Birthday:</p><input name="birth_date" id= "birth_date" type="text"value = "" />
                                 <p>Tier:</p>
                                 <select class ="style" name="reward_tier">
-                                    <option value="value">Value (Free! 1X points)</option>
-                                    <option value="gold">Gold ($50/year, 2X points)</option>
-                                    <option value="platinum">Platinum ($100/year, 3X points)</option>
-                                    <option value="prestige">Prestige ($150/year, 4X points)</option> 
+                                    <option value="value">Value</option>
+                                    <option value="gold">Gold</option>
+                                    <option value="platinum">Platinum</option>
+                                    <option value="prestige">Prestige</option> 
                                 </select>
                                 <p>Email:</p><input onChange="validateEmailInput('InputEmail', this.value)" id="InputEmail" name="email" type="text" >
                                 <p>Password:</p><input onChange="validatePassInput('InputPassword', this.value)" id="InputPassword" name="password" type="password" >

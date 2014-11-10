@@ -121,10 +121,10 @@ else{
 					<span class="icon">&#59197;</span>
 					<p>Tier: 
                                 <select class ="style" name="tier">
-                                    <option value="value">Value (Free! 1X points)</option>
-                                    <option value="gold">Gold ($50/year, 2X points)</option>
-                                    <option value="platinum">Platinum ($100/year, 3X points)</option>
-                                    <option value="prestige">Prestige ($150/year, 4X points)</option> 
+                                    <option value="value">Value</option>
+                                    <option value="gold">Gold</option>
+                                    <option value="platinum">Platinum</option>
+                                    <option value="prestige">Prestige</option> 
                                 </select></p>
                                         
 				</div>

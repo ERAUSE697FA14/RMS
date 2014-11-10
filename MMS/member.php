@@ -18,6 +18,8 @@ if(isset($_POST['delete'])){
     $post_id = $value;
 
     $db->where ("user_id", $post_id);
+    $db->delete("transaction");
+    $db->where ("user_id", $post_id);
     $db->delete("user");
 
     }
@@ -65,7 +67,7 @@ else{
     $to = $db->count;}
     else{
         $from = 0;
-        $to = $from + 10;
+        $to = $db->count;
     }
 }
     }
@@ -74,7 +76,7 @@ else{
 
 <script> 
     function delcfm() { 
-        if (!confirm("Are you sure that you want to permanently delete the selected item(s)?")) { 
+        if (!confirm("All transactions associated with the selected member(s) will be deleted?")) { 
             window.event.returnValue = false; 
         } 
     } 
@@ -167,9 +169,9 @@ else{
 				<h2>a list of members</h2>
 			</hgroup>
 			<aside>
-                                    <button class="green" name ="add">Add</button>
+                                    <!--<button class="green" name ="add">Add</button>-->
                                     <button class="blue" name="edit">View/Edit</button>
-                                    <button class="red" name="delete" onClick="delcfm()">Delete</button>
+                                    <button class="red" name="delete" onClick="delcfm()">Erase</button>
 			</aside>
 		</header>
 		<div class="content">

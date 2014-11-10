@@ -50,8 +50,8 @@ else if(isset($_POST['edit'])){
 }
 else if (isset($_POST['add'])){
    
-            $addRetailerPath = '../MMS/ new_retailer.php';
-            header("Location:".$new_retailer.php);
+            $addRetailerPath = '../MMS/new_retailer.php';
+            header("Location:".$addRetailerPath);
 }
 ?>
 
@@ -152,7 +152,7 @@ else if (isset($_POST['add'])){
 				<h2>a list of retailers</h2>
 			</hgroup>
                         <aside>
-                            <button class="green">Add</button>
+                            <!--<button class="green" name="add">Add</button>-->
                             <button class="blue" name="edit">Edit</button>
                             <button class="red" name="delete" onClick="delcfm()">Delete</button>
                         </aside>

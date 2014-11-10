@@ -125,6 +125,7 @@ if(isset($_POST['edit'])){
 			<table id="myTable" border="0" width="100">
 				<thead>
 					<tr>
+                                                <th></th>
 						<th>Name</th>
 						<th>Path</th>
 					</tr>
@@ -140,7 +141,8 @@ if(isset($_POST['edit'])){
                                             for($index = 0;$index < $db->count;$index++){
                                                 echo "<tr>";
                                                 $id = $mediaList[$index]['media_id'];
-                                                echo "<td><input type='radio' name='selectedMedia'value= $id />" . $mediaList[$index]['name'] . "</td>";
+                                                echo "<td><input type='radio' name='selectedMedia'value= $id /></td>";
+                                                echo "<td>" . $mediaList[$index]['name'] . "</td>";
                                                 echo "<td>" . $mediaList[$index]['value'] . "</td>";
                                                 echo "</tr>";
                                                 }
