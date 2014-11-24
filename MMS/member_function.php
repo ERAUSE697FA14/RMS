@@ -1,4 +1,4 @@
-<?php
+<?php 
 require_once 'session.php';
 if($_SESSION['admin_user_id'] != ""){
     
@@ -8,66 +8,13 @@ else{
       header("Location:".$loginPath);
       exit;
 }
-if(isset($_POST['delete'])){
-    
-        if(!empty($_POST['selectedTransaction'])) {
-            $postSelectedTransactionID = $_POST['selectedTransaction'];
-
-    $db->where ("transaction_id", $postSelectedTransactionID);
-    $db->delete("transaction");
-
-    }
-    $coupons_managePath = "../MMS/coupons_manage.php";
-    header("Location:".$coupons_managePath);
-    
-}
-            
-else{
-require_once 'connectvars.php';
-
-$mysqliDbpath = $_SERVER{'DOCUMENT_ROOT'} ."/libs/MysqliDb.php";
-
-require_once ($mysqliDbpath);
-$db = new MysqliDb(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-
-if ($_POST['transaction_id'] == "" && $_POST['user_id'] == "") {
-    die('no condition');
-}
-if ($_POST['transaction_id'] != "") 
-{
- $db ->where("transaction_id", $_POST['transaction_id']);
- $transactionQuery = $db->get("transaction");
-} else if ($_POST['user_id'] != "") 
-{
-  $db ->where("user_id", $_POST['user_id']);
-  $transactionQuery = $db->get("transaction");
-}
-
-$findTransactions = $transactionQuery;
-
-if($db->count > 0) {
-
-}
-else{
-    die("no transaction find");
-}
-}
-?>
-
-
-<script> 
-    function delcfm() { 
-        if (!confirm("Are you sure that you want to permanently delete the selected item?")) { 
-            window.event.returnValue = false; 
-        } 
-    } 
-</script>
+?> 
 
 <!DOCTYPE html>
 <html lang="">
 <head>
 	<meta charset="utf-8">
-	<title>MMS Rewards - Coupons Management - Search Transactions</title>
+	<title>MMS Members - Functions</title>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="robots" content="" />
@@ -108,7 +55,7 @@ else{
 				<li><a href="backup_restore.php">Backup and Restore</a></li>
 			</ul>	
 		</li>
-		<li>
+		<li class="section">
 			<a href="member.php"><span class="icon">&#59170;</span> Members</a>
 			<ul class="submenu">
 				<li><a href="new_member.php">New Member</a></li>
@@ -122,7 +69,7 @@ else{
 				<li><a href="find_retailer.php">Find Retailers</a></li>
 			</ul>
 		</li>
-                <li class="section">
+                <li>
 			<a href="rewards.php"><span class="icon">&#127942;</span> Rewards</a>
 			<ul class="submenu">
 				<li><a href="tiers_manage.php">Tiers Management</a></li>
@@ -141,58 +88,50 @@ else{
 	</ul>
 </nav>
 
-
 <section class="content" style='margin-top: 0px;'>
-                            <form method="post" action="search_transactions.php">
-		<section class="widget">
+
+	<div class="widget-container">
+		<section class="widget small">
 			<header> 
 				<span class="icon">&#128269;</span>
 				<hgroup>
-					<h1>View Coupons</h1>
-					<h2>a information panel</h2>
+					<h1>New Member</h1>
+					<h2>redirect to new member page</h2>
 				</hgroup>
-                        <aside>
-                                    <button class="red" name="delete" onClick="delcfm()">Delete</button>
-			</aside>
 			</header>
-
-		<div class="content">
-			<table id="myTable" border="0" width="100">
-				<thead>
-					<tr>
-						<th>Transaction ID</th>
-						<th width="10%">User ID</th>
-                                                <th>Retailer ID</th>
-                                                <th>Amount</th>
-						<th>Coupon</th>
-                                                <th>Redeemed</th>
-                                                <th>Issue Time</th>
-					</tr>
-				</thead>
-					<tbody>
-                                            <?php
-                                            $index = $db->count;
-                                            for($index = 0;$index < $db->count;$index++){
-                                                $id = $findTransactions[$index]['transaction_id'];
-                                                echo "<tr>";
-                                                echo "<td><input type='radio' name='selectedTransaction'value= $id />" . $id . "</td>";
-                                                echo "<td>" . $findTransactions[$index]['user_id'] . "</td>";
-                                                
-                                                echo "<td>" . $findTransactions[$index]['retailer_id'] . "</td>";
-                                                echo "<td>" . $findTransactions[$index]['amount_spent'] . "</td>";
-                                                if($findTransactions[$index]['reward_coupon_id'] == '0'){ echo "<td>No</td>" ;} else {echo "<td>Yes</td>" ;}
-                                                if($findTransactions[$index]['is_redeemed'] == '1'){ echo "<td>Yes</td>" ;} else {echo "<td>No</td>" ;}
-                                                echo "<td>" . $findTransactions[$index]['coupon_gen_dt'] . "</td>";
-                                                echo "</tr>";
-                                                }
-                                            ?>
-					</tbody>
-				</table>
-		</div>
-
+                    <div class="content">
+				<section class="stats-wrapper">
+					<div class="stats" style = "width: 100%">
+                        <form method="post" action="new_member.php">
+                                <button name="tiers" class="green" style = "margin:0 0 15px 0">New Member</button>
+                        </form>
+					</div>
+				</section>
+			</div>
 		</section>
-                                                            </form>
+		
+		<section class="widget 	small">
+			<header> 
+				<span class="icon">&#59136;</span>
+				<hgroup>
+					<h1>Find Member</h1>
+					<h2>redirect to find member page</h2>
+				</hgroup>
+			</header>
+			<div class="content">
+				<section class="stats-wrapper">
+					<div class="stats" style = "width: 100%">
+                        <form method="post" action="find_member.php">
+                            <button name="coupons_transactions" class="green" style = "margin:0 0 15px 0">Find Member</button>
+                        </form>
+					</div>
+				</section>
+			</div>
+		</section>
+	</div>
+	
 </section>
+
 <section class="content" id= "foot" style='margin-top: 0px;'>
 	<div id="footer">
 		Copyright &copy; <a href="http://rmsystem.org">Rmsystem 2014</a> Theme powered by John Doe
@@ -210,5 +149,8 @@ else{
 <script src="js/flot-graphs.js"></script>
 <script src="js/cycle.js"></script>-->
 <script src="js/jquery.tablesorter.min.js"></script>
+<script>
+
+</script>
 </body>
 </html>

@@ -176,26 +176,26 @@ $index++;
 		</header>
 		<div class="content">
 
-                                <p>ID: <?php echo $memberList['user_id'];?></p>
-                                <p>First Name:</p><input name="first_name" type="text" value = "<?php echo $memberList['first_name'];?>" disabled >
-                                <p>Last Name:</p><input name="last_name" type="text"value = "<?php echo $memberList['last_name'];?> "disabled >
-                                <p>Address:</p><input name="address_line_1" type="text"value = "<?php echo $memberList['address_line_1'];?>" disabled >
-                                <p></p><input name="address_line_2" type="text"value = "<?php echo $memberList['address_line_2'];?>" disabled >
-                                <p>City:</p><input name="city" type="text"value = "<?php echo $memberList['city'];?> " disabled >
-                                <p>State:</p><input name="state" type="text"value = "<?php echo $memberList['state']?>"disabled >
-                                <p>Zip:</p><input name="zip" type="text"value = "<?php echo $memberList['zip_code'];?>" disabled >
-                                <p>Birthday:</p><input name="birth_date" id= "birth_date" type="text"value = "<?php echo $memberList['birth_date'];?>" disabled >
-                                <p>Tier:</p><input name="reward_tier" type="text"value = "<?php echo $memberList['reward_tier'];?>" disabled>
-                                <p>Email:</p><input name="email" type="text"value = "<?php echo $memberList['email'];?>" disabled >
-                                <p>Password (SHA1):</p><input name="password" type="text" value = "<?php echo $memberList['password'];?>"disabled >
-                                <p>Credit Card (SHA1):</p><input name="cc_number" type="text" value = "<?php echo $memberList['cc_number'];?>" disabled >
-                                <p>Expired Date:</p><input name="cc_expire" type="text" value = "<?php echo $memberList['cc_expire'];?>" disabled >
-                                <p>CVV:</p><input name="cc_cvv" type="text"value = "<?php echo $memberList['cc_cvv'];?>" disabled >
-                                <p>Billing Address:</p><input name="billing_address_line_1" type="text"value = "<?php echo $memberList['billing_address_line_1'];?>" disabled >
-                                <p></p><input name="billing_address_line_2" type="text"value = "<?php echo $memberList['billing_address_line_2'];?>" disabled >
-                                <p>City:</p><input name="billing_city" type="text"value = "<?php echo $memberList['billing_city'];?> "disabled >
-                                <p>State:</p><input name="billing_state" type="text"value = "<?php echo $memberList['billing_state']?>"disabled >
-                                <p>Zip:</p><input name="billing_zip" type="text"value = "<?php echo $memberList['billing_zip'];?>" disabled >
+                                <p><b>ID:</b> <?php echo $memberList['user_id'];?></p>
+                                <p><b>First Name:</b> <?php echo $memberList['first_name'];?></p>
+                                <p><b>Last Name:</b> <?php echo $memberList['last_name'];?></p>
+                                <p><b>Address:</b> <?php echo $memberList['address_line_1'];?></p>
+                                <p><?php echo $memberList['address_line_2'];?></p>
+                                <p><b>City:</b> <?php echo $memberList['city'];?></p>
+                                <p><b>State:</b> <?php echo $memberList['state']?></p>
+                                <p><b>Zip:</b> <?php echo $memberList['zip_code'];?></p>
+                                <p><b>Birthday:</b> <?php echo $memberList['birth_date'];?></p>
+                                <p><b>Tier:</b> <?php echo $memberList['reward_tier'];?></p>
+                                <p><b>Email:</b> <?php echo $memberList['email'];?></p>
+                                <p><b>Password (SHA1):</b> <?php echo $memberList['password'];?></p>
+                                <p><b>Credit Card (SHA1):</b> <?php echo $memberList['cc_number'];?>"</p>
+                                <p><b>Expired Date:</b> <?php echo $memberList['cc_expire'];?></p>
+                                <p><b>CVV:</b> <?php echo $memberList['cc_cvv'];?></p>
+                                <p><b>Billing Address:</b> <?php echo $memberList['billing_address_line_1'];?></p>
+                                <p><?php echo $memberList['billing_address_line_2'];?></p>
+                                <p><b>City:</b> <?php echo $memberList['billing_city'];?></p>
+                                <p><b>State:</b> <?php echo $memberList['billing_state']?></p>
+                                <p><b>Zip:</b> <?php echo $memberList['billing_zip'];?></p>
                         </div>
             
 	</section>
@@ -227,26 +227,26 @@ else{
 		</header>
 		<div class="content">
                     <form method="post" action="edit_member.php">
-                                <p>ID: <?php echo $memberList[$index]['user_id'];?></p>
-                                <p>First Name:</p><input name="first_name" type="text" value = "<?php echo $memberList[$index]['first_name'];?>" disabled >
-                                <p>Last Name:</p><input name="last_name" type="text"value = "<?php echo $memberList[$index]['last_name'];?> " disabled >
-                                <p>Address:</p><input name="address_line_1" type="text"value = "<?php echo $memberList[$index]['address_line_1'];?>" disabled >
-                                <p></p><input name="address_line_2" type="text"value = "<?php echo $memberList[$index]['address_line_2'];?>" disabled >
-                                <p>City:</p><input name="city" type="text"value = "<?php echo $memberList[$index]['city'];?> "disabled >
-                                <p>State:</p><input name="state" type="text"value = "<?php echo $memberList[$index]['state']?>"disabled >
-                                <p>Zip:</p><input name="zip" type="text"value = "<?php echo $memberList[$index]['zip_code'];?>" disabled >
-                                <p>Birthday:</p><input  name="birth_date" id= "birth_date" type="text"value = "<?php echo $memberList[$index]['birth_date'];?>" disabled >
-                                <p>Tier:</p><input name="reward_tier" type="text"value = "<?php echo $memberList[$index]['reward_tier'];?>" disabled>
-                                <p>Email:</p><input name="email" type="text"value = "<?php echo $memberList[$index]['email'];?>" disabled >
-                                <p>Password (SHA1):</p><input name="password" type="text" value = "<?php echo $memberList[$index]['password'];?>"disabled >
-                                <p>Credit Card (SHA1):</p><input name="cc_number" type="text" value = "<?php echo $memberList[$index]['cc_number'];?>" disabled >
-                                <p>Expired Date:</p><input name="cc_expire" type="text" value = "<?php echo $memberList[$index]['cc_expire'];?>" disabled >
-                                <p>CVV:</p><input name="cc_cvv" type="text"value = "<?php echo $memberList[$index]['cc_cvv'];?>" disabled >
-                                <p>Billing Address:</p><input name="billing_address_line_1" type="text"value = "<?php echo $memberList[$index]['billing_address_line_1'];?>" disabled >
-                                <p></p><input name="billing_address_line_2" type="text"value = "<?php echo $memberList[$index]['billing_address_line_2'];?>" disabled >
-                                <p>City:</p><input name="billing_city" type="text"value = "<?php echo $memberList[$index]['billing_city'];?> "disabled >
-                                <p>State:</p><input name="billing_state" type="text"value = "<?php echo $memberList[$index]['billing_state'];?>" disabled >
-                                <p>Zip:</p><input name="billing_zip" type="text"value = "<?php echo $memberList[$index]['billing_zip'];?>" disabled >
+                                <p><b>ID:</b> <?php echo $memberList[$index]['user_id'];?></p>
+                                <p><b>First Name:</b> <?php echo $memberList[$index]['first_name'];?></p>
+                                <p>Last Name: <?php echo $memberList[$index]['last_name'];?></p>
+                                <p>Address: <?php echo $memberList[$index]['address_line_1'];?></p>
+                                <p><?php echo $memberList[$index]['address_line_2'];?></p>
+                                <p>City: <?php echo $memberList[$index]['city'];?></p>
+                                <p>State: <?php echo $memberList[$index]['state']?></p>
+                                <p>Zip: <?php echo $memberList[$index]['zip_code'];?></p>
+                                <p>Birthday: <?php echo $memberList[$index]['birth_date'];?></p>
+                                <p>Tier: <?php echo $memberList[$index]['reward_tier'];?></p>
+                                <p>Email: <?php echo $memberList[$index]['email'];?></p>
+                                <p>Password (SHA1): <?php echo $memberList[$index]['password'];?></p>
+                                <p>Credit Card (SHA1): <?php echo $memberList[$index]['cc_number'];?></p>
+                                <p>Expired Date: <?php echo $memberList[$index]['cc_expire'];?></p>
+                                <p>CVV: <?php echo $memberList[$index]['cc_cvv'];?></p>
+                                <p>Billing Address: <?php echo $memberList[$index]['billing_address_line_1'];?></p>
+                                <p><?php echo $memberList[$index]['billing_address_line_2'];?></p>
+                                <p>City: <?php echo $memberList[$index]['billing_city'];?></p>
+                                <p>State: <?php echo $memberList[$index]['billing_state'];?></p>
+                                <p>Zip: <?php echo $memberList[$index]['billing_zip'];?></p>
                     </form>
                         </div>
 		</div>
@@ -293,7 +293,6 @@ if($maxindex>1){
                 $("#listInfo").fadeOut(500);
                 $("#nav").height($("#nav").height() - $(this).parent().parent().parent().parent().height() - $("#listInfo").height());
 	});
-
 </script>
 </body>
 </html>

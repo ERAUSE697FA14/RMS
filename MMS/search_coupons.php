@@ -67,12 +67,12 @@ if ($_POST['coupon_id'] == "" && $_POST['user_id'] == "") {
 }
 if ($_POST['coupon_id'] != "") 
 {
- $db ->where("reward_coupon_id", $_POST['coupon_id']);
- $couponQuery = $db->get("transaction");
+   $coupon_id = $_POST['coupon_id'];  
+   $couponQuery = $db->rawQuery("SELECT DISTINCT reward_coupon_id, user_id,retailer_id,is_redeemed,coupon_gen_dt  FROM transaction WHERE reward_coupon_id = '$coupon_id'");
 } else if ($_POST['user_id'] != "") 
 {
   $user_id = $_POST['user_id'];   
-  $couponQuery = $db->rawQuery("SELECT DISTINCT reward_coupon_id FROM transaction WHERE user_id = '$user_id' AND reward_coupon_id != 0 ");
+  $couponQuery = $db->rawQuery("SELECT DISTINCT reward_coupon_id, user_id,retailer_id,is_redeemed,coupon_gen_dt  FROM transaction WHERE user_id = '$user_id' AND reward_coupon_id != 0 ");
 
 }
 

@@ -116,7 +116,7 @@ else if (isset($_POST['add'])){
 			</ul>
 		</li>
                 <li class="section">
-			<a href="retailer.php"><span class="icon">&#59148;</span> Retailers</a>
+			<a href="retailer_function.php"><span class="icon">&#59148;</span> Retailers</a>
 			<ul class="submenu">
 				<li><a href="new_retailer.php">New Retailer</a></li>
 				<li><a href="find_retailer.php">Find Retailers</a></li>

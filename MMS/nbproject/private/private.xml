@@ -3,8 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Library/Documents/NetBeansProjects/MMS/backup_restore.php</file>
-            <file>file:/D:/Library/Documents/NetBeansProjects/MMS/login.php</file>
+            <file>file:/D:/Library/Documents/NetBeansProjects/MMS/member.php</file>
+            <file>file:/D:/Library/Documents/NetBeansProjects/MMS/member_function.php</file>
+            <file>file:/D:/Library/Documents/NetBeansProjects/MMS/search_transactions.php</file>
+            <file>file:/D:/Library/Documents/NetBeansProjects/MMS/find_member.php</file>
+            <file>file:/D:/Library/Documents/NetBeansProjects/MMS/retailer.php</file>
+            <file>file:/D:/Library/Documents/NetBeansProjects/MMS/search_coupons.php</file>
+            <file>file:/D:/Library/Documents/NetBeansProjects/MMS/new_member.php</file>
+            <file>file:/D:/Library/Documents/NetBeansProjects/MMS/search.php</file>
+            <file>file:/D:/Library/Documents/NetBeansProjects/MMS/retailer_function.php</file>
+            <file>file:/D:/Library/Documents/NetBeansProjects/MMS/rewards.php</file>
         </group>
     </open-files>
 </project-private>

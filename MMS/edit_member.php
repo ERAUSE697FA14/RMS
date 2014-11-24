@@ -102,6 +102,13 @@ else if (isset ($_POST['close'])){
     
     echo "<script type='text/javascript'>window.close();</script>";
 }
+else if(isset ($_POST['act'])){
+session_start();
+$user_id = $_SESSION['passid'];
+$db->where ("user_id", $user_id);
+$actData['activation']='';
+$status = $db->update('user',$actData);
+}
 else{
 $user_id = $_GET['memberid'];
 require_once 'connectvars.php';
@@ -300,10 +307,10 @@ function selectValue(sId,value){
                                 <p>Birthday:</p><input name="birth_date" id= "birth_date" type="text"value = "<?php echo $member['birth_date'];?>" />
                                 <p>Tier:</p>
                                 <select class ="style" name="reward_tier" id="InputTier<?php echo $member['user_id'];?>">
-                                    <option value="value">Value (Free! 1X points)</option>
-                                    <option value="gold">Gold ($50/year, 2X points)</option>
-                                    <option value="platinum">Platinum ($100/year, 3X points)</option>
-                                    <option value="prestige">Prestige ($150/year, 4X points)</option> 
+                                    <option value="value">Value</option>
+                                    <option value="gold">Gold</option>
+                                    <option value="platinum">Platinum</option>
+                                    <option value="prestige">Prestige</option> 
                                 </select>
                                 <script>
                                     selectValue('InputTier<?php echo $member['user_id']?>','<?php echo $member['reward_tier'];?>');  
@@ -374,6 +381,8 @@ function selectValue(sId,value){
                                     selectValue('billingState<?php echo $member['user_id']?>','<?php echo $member['billing_state'];?>');  
                                 </script>
                                 <p>Zip:</p><input name="billing_zip" type="text"value = "<?php echo $member['billing_zip'];?>" />
+                                
+                                <?php if ($member['activation'] != "") {echo "<p>Activation: <button class='red' name ='act'>Active</button>";}?>
                         </div>
 		</div>
 	</section>

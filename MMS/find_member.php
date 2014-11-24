@@ -121,6 +121,7 @@ else{
 					<span class="icon">&#59197;</span>
 					<p>Tier: 
                                 <select class ="style" name="tier">
+                                    <option value="">...</option>
                                     <option value="value">Value</option>
                                     <option value="gold">Gold</option>
                                     <option value="platinum">Platinum</option>

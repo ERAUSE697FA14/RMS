@@ -127,7 +127,7 @@ else{
 			</ul>	
 		</li>
 		<li class="section">
-			<a href="member.php"><span class="icon">&#59170;</span> Members</a>
+                    <a href="member_function.php"><span class="icon">&#59170;</span> Members</a>
 			<ul class="submenu">
 				<li><a href="new_member.php">New Member</a></li>
 				<li><a href="find_member.php">Find Members</a></li>
@@ -171,18 +171,16 @@ else{
 			<aside>
                                     <!--<button class="green" name ="add">Add</button>-->
                                     <button class="blue" name="edit">View/Edit</button>
-                                    <button class="red" name="delete" onClick="delcfm()">Erase</button>
+                                    <button class="red" name="delete" onClick="delcfm()">Delete</button>
 			</aside>
 		</header>
 		<div class="content">
 			<table id="myTable" border="0" width="100">
 				<thead>
 					<tr>
-						<th width="10%">ID</th>
-						<th>Name</th>
-                                                <th>Email</th>
-						<th>Points</th>
-						<th>Tier</th>
+						<th width="5%">ID</th>
+						<th>Name (Email)</th>
+						<th>Tier - Points</th>
                                                 <th>City, State</th>
 					</tr>
 				</thead>
@@ -192,10 +190,8 @@ else{
                                                 echo "<tr>";
                                                 $id = $memberList[$index]['user_id'];
                                                 echo "<td><input type='checkbox' name='selectedMembers[]' value= $id />" . $memberList[$index]['user_id']. "</td>";
-                                                echo "<td>" . $memberList[$index]['first_name']." ". $memberList[$index]['last_name'] . "</td>";
-                                                echo "<td>" . $memberList[$index]['email'] . "</td>";
-                                                echo "<td>" . $memberList[$index]['reward_points'] . "</td>";
-                                                echo "<td>" . $memberList[$index]['reward_tier'] . "</td>";
+                                                echo "<td>" . $memberList[$index]['first_name']." ". $memberList[$index]['last_name'] ." (".$memberList[$index]['email'].")"."</td>";
+                                                echo "<td>" . $memberList[$index]['reward_tier'] ." - ".$memberList[$index]['reward_points']. "</td>";
                                                 echo "<td>" . $memberList[$index]['city']. ", ".$memberList[$index]['state'] . "</td>";
                                                 echo "</tr>";
                                                 }
